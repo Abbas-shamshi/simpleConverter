@@ -9,6 +9,14 @@ import {
   ScrollView,
   
 } from 'react-native';
+
+import DistanceVC from './components/distance';
+import CalculatorVC from './components/calculator';
+import MeasureVC from './components/measure';
+import SpeedVC from './components/speed';
+import WeightVC from './components/weight';
+import TemperatureVC from './components/temperature';
+
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
@@ -184,14 +192,14 @@ export default class Converter extends Component {
             </View>
 
             {/* ################COMPONENTS################### */}
-            {/* Weight Display Component Layout */}
+            {/* Distance Display Component Layout */}
             <View style={{display: this.state.distanceDisplay}}>
               <TouchableHighlight onPress={this.homePage}>
                 <View style={styles.backButtonContainer}>
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
               </TouchableHighlight>
-              
+              <DistanceVC />
             </View>
 
             {/* Weight Display Component Layout */}
@@ -201,7 +209,7 @@ export default class Converter extends Component {
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
               </TouchableHighlight>
-              
+              <WeightVC />
             </View>
 
             {/* Temperature Display Component Layout */}
@@ -211,7 +219,7 @@ export default class Converter extends Component {
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
               </TouchableHighlight>
-              
+              <TemperatureVC />
             </View>
 
             {/* Measure Display Component Layout */}
@@ -221,7 +229,7 @@ export default class Converter extends Component {
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
               </TouchableHighlight>
-              
+              <MeasureVC />
             </View>
 
             {/* Speed Display Component Layout */}
@@ -231,7 +239,7 @@ export default class Converter extends Component {
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
               </TouchableHighlight>
-              
+              <SpeedVC />
             </View>
 
             {/* Calculator Display Component Layout */}
@@ -241,7 +249,7 @@ export default class Converter extends Component {
                   <Text style={styles.backButtonText}>Back</Text>
                 </View>
               </TouchableHighlight>
-              
+              <CalculatorVC />
             </View>
 
             {/* End Component Layout calls */}
