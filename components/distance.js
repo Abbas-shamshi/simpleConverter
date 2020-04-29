@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
   },
   backButtonContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'blue',
     width: (1.2 * deviceWidth) / 6,
     height: deviceHeight / 22,
     alignItems: 'center',
