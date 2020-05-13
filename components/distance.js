@@ -59,6 +59,14 @@ export default class DistanceVC extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {/* {
+          this.state.advance ? "show" : null}
+        }
+        {
+          this.state.advance && (
+            "show"
+          )
+        } */}
         <View style={styles.headContainer}>
           <View style={styles.headTextContainer}>
             <Text style={styles.headText}>Distance</Text>

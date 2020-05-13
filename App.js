@@ -14,25 +14,17 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Converter from './converter';
+import Currency from './components/currency';
+import DistanceVC from './components/distance';
+import TemperatureVC from './components/temperature';
 
-const App: () => React$Node = () => {
+const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
+      
           
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          
-          <Converter />
-        </ScrollView>
-      </SafeAreaView>
+          <Currency/>
     </>
   );
 };
