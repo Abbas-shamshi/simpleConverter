@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -7,7 +7,7 @@ import {
   Dimensions,
   SafeAreaView,
   ScrollView,
-  
+
 } from 'react-native';
 
 import DistanceVC from './components/distance';
@@ -27,14 +27,14 @@ export default class Converter extends Component {
   state = {
     homeDisplay: 'flex',
     distanceDisplay: 'none',
-    weightDisplay: 'none',	
+    weightDisplay: 'none',
     measureDisplay: 'none',
     speedDisplay: 'none',
     calculatorDisplay: 'none',
   };
 
   _handleTextChange = (inputValue) => {
-    this.setState({inputValue});
+    this.setState({ inputValue });
   };
 
   //   Dynamic view changing functions
@@ -124,138 +124,157 @@ export default class Converter extends Component {
 
   render() {
     return (
-        <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <View style={styles.container}>
-            {/* Home display */}
-            <View style={{display: this.state.homeDisplay}}>
-              {/* Heading */}
-              <View style={styles.headContainer}>
-                <Text style={styles.headText}>Simple Conversion</Text>
-              </View>
+      <View style={styles.container}>
 
-              {/* Distance Button Layout */}
-              <TouchableHighlight onPress={this.showDistance}>
-                <View style={styles.buttonInContainer}>
-                  <View style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Distance</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
 
-              {/* Weight Button Layout */}
-              <TouchableHighlight onPress={this.showWeight}>
-                <View style={styles.buttonInContainer}>
-                  <View style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Weight</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
-
-              {/* Measure Button Layout */}
-              <TouchableHighlight onPress={this.showMeasure}>
-                <View style={styles.buttonInContainer}>
-                  <View style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Measure</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
-
-              {/* Temperature Button Layout */}
-              <TouchableHighlight onPress={this.showTemperature}>
-                <View style={styles.buttonInContainer}>
-                  <View style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Temperature</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
-
-              {/* Speed Button Layout */}
-              <TouchableHighlight onPress={this.showSpeed}>
-                <View style={styles.buttonInContainer}>
-                  <View style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Speed</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
-
-              {/* Calculator Button Layout */}
-              <TouchableHighlight onPress={this.showCalculator}>
-                <View style={styles.buttonInContainer}>
-                  <View style={styles.buttonContainer}>
-                    <Text style={styles.buttonText}>Calculator</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
-            </View>
-
-            {/* ################COMPONENTS################### */}
-            {/* Distance Display Component Layout */}
-            <View style={{display: this.state.distanceDisplay}}>
-              <TouchableHighlight onPress={this.homePage}>
-                <View style={styles.backButtonContainer}>
-                  <Text style={styles.backButtonText}>Back</Text>
-                </View>
-              </TouchableHighlight>
-              <DistanceVC />
-            </View>
-
-            {/* Weight Display Component Layout */}
-            <View style={{display: this.state.weightDisplay}}>
-              <TouchableHighlight onPress={this.homePage}>
-                <View style={styles.backButtonContainer}>
-                  <Text style={styles.backButtonText}>Back</Text>
-                </View>
-              </TouchableHighlight>
-              <WeightVC />
-            </View>
-
-            {/* Temperature Display Component Layout */}
-            <View style={{display: this.state.temperatureDisplay}}>
-              <TouchableHighlight onPress={this.homePage}>
-                <View style={styles.backButtonContainer}>
-                  <Text style={styles.backButtonText}>Back</Text>
-                </View>
-              </TouchableHighlight>
-              <TemperatureVC />
-            </View>
-
-            {/* Measure Display Component Layout */}
-            <View style={{display: this.state.measureDisplay}}>
-              <TouchableHighlight onPress={this.homePage}>
-                <View style={styles.backButtonContainer}>
-                  <Text style={styles.backButtonText}>Back</Text>
-                </View>
-              </TouchableHighlight>
-              <MeasureVC />
-            </View>
-
-            {/* Speed Display Component Layout */}
-            <View style={{display: this.state.speedDisplay}}>
-              <TouchableHighlight onPress={this.homePage}>
-                <View style={styles.backButtonContainer}>
-                  <Text style={styles.backButtonText}>Back</Text>
-                </View>
-              </TouchableHighlight>
-              <SpeedVC />
-            </View>
-
-            {/* Calculator Display Component Layout */}
-            <View style={{display: this.state.calculatorDisplay}}>
-              <TouchableHighlight onPress={this.homePage}>
-                <View style={styles.backButtonContainer}>
-                  <Text style={styles.backButtonText}>Back</Text>
-                </View>
-              </TouchableHighlight>
-              <CalculatorVC />
-            </View>
-
-            {/* End Component Layout calls */}
+        {/* Home display */}
+        <View style={{ display: this.state.homeDisplay }}>
+          {/* Heading */}
+          <View style={styles.headContainer}>
+            <Text style={styles.headText}>Simple Conversion</Text>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+          <ScrollView>
+            {/* Distance Button Layout */}
+            <TouchableHighlight onPress={this.showDistance}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Distance</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+
+            {/* Weight Button Layout */}
+            <TouchableHighlight onPress={this.showWeight}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Weight</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+
+            {/* Measure Button Layout */}
+            <TouchableHighlight onPress={this.showMeasure}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Measure</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+
+            {/* Temperature Button Layout */}
+            <TouchableHighlight onPress={this.showTemperature}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Temperature</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+
+            {/* Speed Button Layout */}
+            <TouchableHighlight onPress={this.showSpeed}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Speed</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+
+            {/* Speed Button Layout */}
+            <TouchableHighlight onPress={this.showSpeed}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Speed</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+
+
+            {/* Calculator Button Layout */}
+            <TouchableHighlight onPress={this.showCalculator}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Calculator</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+            {/* Speed Button Layout */}
+            <TouchableHighlight onPress={this.showSpeed}>
+              <View style={styles.buttonInContainer}>
+                <View style={styles.buttonContainer}>
+                  <Text style={styles.buttonText}>Speed</Text>
+                </View>
+              </View>
+            </TouchableHighlight>
+
+          </ScrollView>
+
+        </View>
+
+
+        {/* ################COMPONENTS################### */}
+        {/* Distance Display Component Layout */}
+        <View style={{ display: this.state.distanceDisplay }}>
+          <TouchableHighlight onPress={this.homePage}>
+            <View style={styles.backButtonContainer}>
+              <Text style={styles.backButtonText}>Back</Text>
+            </View>
+          </TouchableHighlight>
+          <DistanceVC />
+        </View>
+
+        {/* Weight Display Component Layout */}
+        <View style={{ display: this.state.weightDisplay }}>
+          <TouchableHighlight onPress={this.homePage}>
+            <View style={styles.backButtonContainer}>
+              <Text style={styles.backButtonText}>Back</Text>
+            </View>
+          </TouchableHighlight>
+          <WeightVC />
+        </View>
+
+        {/* Temperature Display Component Layout */}
+        <View style={{ display: this.state.temperatureDisplay }}>
+          <TouchableHighlight onPress={this.homePage}>
+            <View style={styles.backButtonContainer}>
+              <Text style={styles.backButtonText}>Back</Text>
+            </View>
+          </TouchableHighlight>
+          <TemperatureVC />
+        </View>
+
+        {/* Measure Display Component Layout */}
+        <View style={{ display: this.state.measureDisplay }}>
+          <TouchableHighlight onPress={this.homePage}>
+            <View style={styles.backButtonContainer}>
+              <Text style={styles.backButtonText}>Back</Text>
+            </View>
+          </TouchableHighlight>
+          <MeasureVC />
+        </View>
+
+        {/* Speed Display Component Layout */}
+        <View style={{ display: this.state.speedDisplay }}>
+          <TouchableHighlight onPress={this.homePage}>
+            <View style={styles.backButtonContainer}>
+              <Text style={styles.backButtonText}>Back</Text>
+            </View>
+          </TouchableHighlight>
+          <SpeedVC />
+        </View>
+
+        {/* Calculator Display Component Layout */}
+        <View style={{ display: this.state.calculatorDisplay }}>
+          <TouchableHighlight onPress={this.homePage}>
+            <View style={styles.backButtonContainer}>
+              <Text style={styles.backButtonText}>Back</Text>
+            </View>
+          </TouchableHighlight>
+          <CalculatorVC />
+        </View>
+
+        {/* End Component Layout calls */}
+
+      </View>
     );
   }
 }
@@ -290,7 +309,7 @@ const styles = StyleSheet.create({
     width: (3 * deviceWidth) / 6,
     backgroundColor: 'blue',
     marginHorizontal: 'auto',
-    marginTop: 40,
+    marginVertical: 20,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',

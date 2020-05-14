@@ -16,3 +16,6 @@
 ##   Run Application on different port
     npx react-native run-android --port=8080
 
+## To run Emulator from command Prompt
+    emulator -avd Android_pixel
+
