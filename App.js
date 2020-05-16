@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,24 +8,35 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+
 
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
+import HomeStack from './routes/homestack';
 import Converter from './converter';
 import Currency from './components/currency';
 import DistanceVC from './components/distance';
 import TemperatureVC from './components/temperature';
+import Home_temp from './routes/home_temp';
+import { createStackNavigator } from '@react-navigation/stack';
+import Details from './routes/details';
+
+
+const Stack = createStackNavigator();
 
 const App = () => {
+  
   return (
-    <>
+    <Fragment>
       <StatusBar barStyle="dark-content" />
+
       
-          
-          <Currency/>
-    </>
+
+      <HomeStack/>
+    </Fragment >
   );
 };
 
