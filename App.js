@@ -33,9 +33,14 @@ const App = () => {
     <Fragment>
       <StatusBar barStyle="dark-content" />
 
-      
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Currency} />
+          <Stack.Screen name="Distance" component={DistanceVC} />
+        </Stack.Navigator>
+          
+      </NavigationContainer>
 
-      <HomeStack/>
     </Fragment >
   );
 };
