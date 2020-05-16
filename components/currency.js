@@ -25,15 +25,11 @@ export default class Currency extends Component {
         super(props);
     }
     state = {
-        homeDisplay: 'flex',
-        distanceDisplay: 'none',
-        weightDisplay: 'none',
-        measureDisplay: 'none',
+        
         ValueA: '0',
         ValueB: '0',
-        fromCurrency: 'USD',
-        toCurrency: 'INR',
-        name: 'abbas',
+        from: 'USD',
+        to: 'INR',
         exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
     };
 
@@ -43,11 +39,11 @@ export default class Currency extends Component {
             ValueA: value,
         })
         axios
-            .get(`http://api.openrates.io/latest?base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
+            .get(`http://api.openrates.io/latest?base=${this.state.from}&symbols=${this.state.to}`)
             .then(response => {
                 this.setState({
 
-                    ValueB: String((parseInt(value) * parseFloat(response.data.rates[this.state.toCurrency])).toFixed(2)),
+                    ValueB: String((parseInt(value) * parseFloat(response.data.rates[this.state.to])).toFixed(2)),
                 })
 
             })
@@ -62,11 +58,11 @@ export default class Currency extends Component {
             ValueB: value,
         })
         axios
-            .get(`http://api.openrates.io/latest?base=${this.state.toCurrency}&symbols=${this.state.fromCurrency}`)
+            .get(`http://api.openrates.io/latest?base=${this.state.to}&symbols=${this.state.from}`)
             .then(response => {
                 this.setState({
 
-                    ValueA: String((parseInt(value) * parseFloat(response.data.rates[this.state.fromCurrency])).toFixed(2)),
+                    ValueA: String((parseInt(value) * parseFloat(response.data.rates[this.state.from])).toFixed(2)),
                 })
 
             })
@@ -77,10 +73,15 @@ export default class Currency extends Component {
 
     }
     navigator (value) {
-        console.log("Hello navigation")
         this.props.navigation.navigate(value)
 
     }
+    clear = () => {
+        this.setState({
+          ValueA: '0',
+          ValueB: '0',
+        })
+      }
     
 
 
@@ -117,9 +118,9 @@ export default class Currency extends Component {
 
                         <View style={styles.dropDownContainer}>
                             <Picker
-                                selectedValue={this.state.fromCurrency}
+                                selectedValue={this.state.from}
                                 style={styles.picker}
-                                onValueChange={(itemValue) => this.setState({ fromCurrency: itemValue })}
+                                onValueChange={(itemValue) => this.setState({ from: itemValue })}
                             >
                                 <Picker.Item label="USD Dollar" value="USD" />
                                 <Picker.Item label="Indian Rupee" value="INR" />
@@ -132,9 +133,9 @@ export default class Currency extends Component {
                                 <Picker.Item label="Honk Kong Dollar" value="HKD" />
                             </Picker>
                             <Picker
-                                selectedValue={this.state.toCurrency}
+                                selectedValue={this.state.to}
                                 style={styles.picker}
-                                onValueChange={(itemValue) => this.setState({ toCurrency: itemValue })}
+                                onValueChange={(itemValue) => this.setState({ to: itemValue })}
                             >
                                 <Picker.Item label="USD Dollar" value="USD" />
                                 <Picker.Item label="Indian Rupee" value="INR" />
@@ -152,7 +153,7 @@ export default class Currency extends Component {
                         <View style={styles.inputBoxContainer}>
                             <View style={styles.currencyValueContainer}>
                                 <Text style={styles.CurrencyValue}>
-                                    {this.state.fromCurrency}
+                                    {this.state.from}
                                 </Text>
                             </View>
                             <TextInput
@@ -167,18 +168,29 @@ export default class Currency extends Component {
                         <View style={styles.inputBoxContainer}>
                             <View style={styles.currencyValueContainer}>
                                 <Text style={styles.CurrencyValue}>
-                                    {this.state.toCurrency}
+                                    {this.state.to}
                                 </Text>
                             </View>
                             <TextInput
                                 style={styles.inputBox}
                                 keyboardType={'numeric'}
                                 value={this.state.ValueB}
-                                onChangeText={(value)=>this.converterB(value,'abcd')}
+                                onChangeText={(value)=>this.converterB(value)}
                             />
 
 
                         </View>
+                        <TouchableHighlight
+              onPress={this.clear}>
+              <View style={styles.inputBoxContainer}>
+                <View style={styles.button} >
+                  <Text>
+                    Clear
+                  </Text>
+                </View>
+
+              </View>
+            </TouchableHighlight>
 
                     </View>
                 </View>
@@ -217,7 +229,8 @@ const styles = StyleSheet.create({
     button:{
         height:deviceHeight/14,
         width:(3*deviceWidth)/8,
-        backgroundColor:'green',
+        backgroundColor: '#b734cf',
+
         borderRadius:5,
         borderColor:'red',
         alignItems:'center',

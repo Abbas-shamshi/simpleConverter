@@ -24,14 +24,12 @@ export default class DistanceVC extends Component {
     super(props);
   }
   state = {
-    homeDisplay: 'flex',
-    distanceDisplay: 'none',
-    weightDisplay: 'none',
-    measureDisplay: 'none',
+
     ValueA: '0',
     ValueB: '0',
-    ValueC: '0',
-    ValueD: '0',
+    from: 'KM',
+    to: 'CM',
+    exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
   };
 
   //   Other conversion functions
@@ -59,26 +57,146 @@ export default class DistanceVC extends Component {
       valueC: String((parseInt(valueD) * 100).toFixed(2)),
     });
   };
+  converter(value, input) {
+    console.log(input);
+
+    if (input == 'value1') {
+      this.setState({
+        ValueA: value,
+      })
+      if (this.state.from == 'KM' && this.state.to == 'CM') {
+        this.setState({
+          ValueB: String((parseInt(value) * 100000).toFixed(2)),
+        });
+        console.log('KM TO CM')
+      } else if (this.state.from == 'KM' && this.state.to == 'Mile') {
+        this.setState({
+          ValueB: String((parseInt(value) / 1.609).toFixed(2)),
+        });
+        console.log('KM TO Mile')
+      } else if (this.state.from == 'KM' && this.state.to == 'Meter') {
+        this.setState({
+          ValueB: String((parseInt(value) * 1000).toFixed(2)),
+        });
+        console.log('KM TO Meter')
+      } else if (this.state.from == 'CM' && this.state.to == 'KM') {
+        this.setState({
+          ValueB: String((parseInt(value) / 100000).toFixed(2)),
+        });
+        console.log('CM TO KM')
+      } else if (this.state.from == 'CM' && this.state.to == 'Mile') {
+        this.setState({
+          ValueB: String((parseInt(value) / 160934).toFixed(2)),
+        });
+        console.log('CM TO Mile')
+      } else if (this.state.from == 'CM' && this.state.to == 'Meter') {
+        this.setState({
+          ValueB: String((parseInt(value) / 100).toFixed(2)),
+        });
+        console.log('CM TO Meter')
+      } else if (this.state.from == 'Mile' && this.state.to == 'KM') {
+        this.setState({
+          ValueB: String((parseInt(value) * 1.60).toFixed(2)),
+        });
+        console.log('Mile TO KM')
+      } else if (this.state.from == 'Mile' && this.state.to == 'CM') {
+        this.setState({
+          ValueB: String((parseInt(value) * 160934).toFixed(2)),
+        });
+        console.log('Mile TO CM')
+      } else if (this.state.from == 'Mile' && this.state.to == 'Meter') {
+        this.setState({
+          ValueB: String((parseInt(value) * 1609).toFixed(2)),
+        });
+        console.log('Mile TO Meter')
+      } else if (this.state.from == 'Meter' && this.state.to == 'KM') {
+        this.setState({
+          ValueB: String((parseInt(value) / 1000).toFixed(2)),
+        });
+        console.log('Meter TO KM')
+      } else if (this.state.from == 'Meter' && this.state.to == 'CM') {
+        this.setState({
+          ValueB: String((parseInt(value) * 100).toFixed(2)),
+        });
+        console.log('Meter TO CM')
+      } else if (this.state.from == 'Meter' && this.state.to == 'Mile') {
+        this.setState({
+          ValueB: String((parseInt(value) / 1609).toFixed(2)),
+        });
+        console.log('Meter TO Mile')
+      } else if (this.state.from == 'Meter' && this.state.to == 'Meter') {
+        this.setState({
+          ValueB: value,
+        });
+        console.log('Meter TO Meter')
+      } else if (this.state.from == 'Mile' && this.state.to == 'Mile') {
+        this.setState({
+          ValueB: value,
+        });
+        console.log('Mile TO Mile')
+      } else if (this.state.from == 'KM' && this.state.to == 'KM') {
+        this.setState({
+          ValueB: value,
+        });
+        console.log('KM TO KM')
+      } else if (this.state.from == 'CM' && this.state.to == 'CM') {
+        this.setState({
+          ValueB: value,
+        });
+        console.log('CM TO CM')
+      }
+
+    } /* else if (input == 'value2') {
+      const frm = this.state.from;
+      this.setState({
+        ValueB: value,
+        from: this.state.to,
+        to: frm,
+      }) 
+      
+    }*/
+    
+
+
+
+  }
+  valuePicker(itemValue,pickerNO){
+    if(pickerNO == 'picker1'){
+      this.setState({
+        from: itemValue,
+        ValueA: '0',
+        ValueB: '0',
+      })
+    }else if (pickerNO == 'picker2'){
+      this.setState({
+        to: itemValue,
+        ValueA: '0',
+        ValueB: '0',
+      })
+    }
+    
+
+
+  }
   navigator(value) {
     console.log("Hello navigation")
     this.props.navigation.navigate(value)
 
   }
+  clear = () => {
+    this.setState({
+      ValueA: '0',
+      ValueB: '0',
+    })
+  }
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
-          {/* {
-          this.state.advance ? "show" : null}
-        }
-        {
-          this.state.advance && (
-            "show"
-          )
-        } */}
           <View style={styles.headContainer}>
             <View style={styles.headTextContainer}>
               <Picker
+                selectedValue={this.state.fromCurrency}
                 style={styles.pickerHeader}
                 onValueChange={(value) => this.navigator(value)}
               >
@@ -93,43 +211,82 @@ export default class DistanceVC extends Component {
             </View>
           </View>
 
+
           <View style={styles.conversionContainer}>
-            <View style={styles.conversionHeadContainer}>
-              <Text style={styles.conversionHeadText}>KM to MILES</Text>
+            <View style={styles.imageConatiner}>
+              <Image
+                style={styles.currencyImage}
+                source={{ uri: this.state.exchangeImage }} />
+
+            </View>
+
+            <View style={styles.dropDownContainer}>
+              <Picker
+                selectedValue={this.state.from}
+                style={styles.picker}
+                onValueChange={(itemValue) => this.valuePicker(itemValue,'picker1')}
+              >
+                <Picker.Item label="KM" value="KM" />
+                <Picker.Item label="Mile" value="Mile" />
+                <Picker.Item label="CM" value="CM" />
+                <Picker.Item label="Meter" value="Meter" />
+
+              </Picker>
+              <Picker
+                selectedValue={this.state.to}
+                style={styles.picker}
+                onValueChange={(itemValue) => this.valuePicker(itemValue,'picker2')}
+              >
+                <Picker.Item label="KM" value="KM" />
+                <Picker.Item label="Mile" value="Mile" />
+                <Picker.Item label="CM" value="CM" />
+                <Picker.Item label="Meter" value="Meter" />
+
+              </Picker>
+            </View>
+
+            <View style={styles.inputBoxContainer}>
+              <View style={styles.currencyValueContainer}>
+                <Text style={styles.CurrencyValue}>
+                  {this.state.from}
+                </Text>
+              </View>
+              <TextInput
+                style={styles.inputBox}
+                keyboardType={'numeric'}
+                value={this.state.ValueA}
+                onChangeText={(value) => this.converter(value, 'value1')}
+              />
+
+
             </View>
             <View style={styles.inputBoxContainer}>
+              <View style={styles.currencyValueContainer}>
+                <Text style={styles.CurrencyValue}>
+                  {this.state.to}
+                </Text>
+              </View>
               <TextInput
+                editable={false} 
                 style={styles.inputBox}
                 keyboardType={'numeric'}
-                value={this.state.valueA}
-                onChangeText={this.kmToMiles}
+                value={this.state.ValueB}
+                onChangeText={(value) => this.converter(value, 'value2')}
               />
-              <TextInput
-                style={styles.inputBox}
-                keyboardType={'numeric'}
-                value={this.state.valueB}
-                onChangeText={this.milesToKm}
-              />
+
             </View>
-          </View>
-          <View style={styles.conversionContainer}>
-            <View style={styles.conversionHeadContainer}>
-              <Text style={styles.conversionHeadText}>CentiMeter to Meter</Text>
-            </View>
-            <View style={styles.inputBoxContainer}>
-              <TextInput
-                style={styles.inputBox}
-                keyboardType={'numeric'}
-                value={this.state.valueC}
-                onChangeText={this.cmToMeter}
-              />
-              <TextInput
-                style={styles.inputBox}
-                keyboardType={'numeric'}
-                value={this.state.valueD}
-                onChangeText={this.meterToCm}
-              />
-            </View>
+            <TouchableHighlight
+              onPress={this.clear}>
+              <View style={styles.inputBoxContainer}>
+                <View style={styles.button} >
+                  <Text>
+                    Clear
+                  </Text>
+                </View>
+
+              </View>
+            </TouchableHighlight>
+
           </View>
         </View>
       </ScrollView>
@@ -159,40 +316,38 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   buttonContainer: {
-    height: deviceHeight / 5,
-    width: (3 * deviceWidth) / 4,
-    backgroundColor: 'blue',
-    marginHorizontal: 'auto',
-    marginTop: 40,
-    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 30,
   },
-  buttonText: {
-    fontSize: deviceHeight / 24,
+  button: {
+    height: deviceHeight / 14,
+    width: (3 * deviceWidth) / 8,
+    backgroundColor: '#b734cf',
+    borderRadius: 5,
+    borderColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
     color: 'white',
   },
-  conversionHeadContainer: {
-    marginHorizontal: 'auto',
-    marginTop: 30,
-    alignItems: 'center',
+  buttonText: {
+    fontSize: deviceHeight / 22
   },
-  conversionHeadText: {
-    fontSize: deviceHeight / 20,
-    fontWeight: 'bold',
-    color: 'blue',
-  },
+
   inputBoxContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 20,
   },
   inputBox: {
-    backgroundColor: 'grey',
-    width: (1.4 * deviceWidth) / 4,
+    backgroundColor: 'lightgrey',
+    width: (3 * deviceWidth) / 4,
     height: deviceHeight / 10,
-    borderRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+
     fontSize: deviceHeight / 25,
     color: 'black',
 
@@ -202,17 +357,14 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     borderBottomWidth: 2,
     borderColor: 'blue',
+    height: (9 * deviceHeight) / 10,
+    marginTop: 10,
   },
-  backButtonContainer: {
-    backgroundColor: 'blue',
-    width: (1.2 * deviceWidth) / 6,
-    height: deviceHeight / 22,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 6,
-  },
-  backButtonText: {
-    fontSize: deviceHeight / 24,
+  dropDownContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginTop: deviceHeight / 18,
   },
   picker: {
     height: deviceHeight / 16,
@@ -222,6 +374,28 @@ const styles = StyleSheet.create({
       { scaleY: 1.3 },
     ]
   },
+  CurrencyValue: {
+    fontSize: deviceHeight / 30,
+    padding: 10,
+
+  },
+  currencyValueContainer: {
+    justifyContent: "center",
+    alignItems: 'center',
+    height: deviceHeight / 10,
+    backgroundColor: 'lightgrey',
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderRightWidth: 1
+  },
+  imageConatiner: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  currencyImage: {
+    width: (2 * deviceWidth) / 4,
+    height: (2 * deviceWidth) / 4
+  },
   pickerHeader: {
     height: deviceHeight / 16,
     width: (2 * deviceWidth) / 3,
@@ -230,5 +404,5 @@ const styles = StyleSheet.create({
       { scaleY: 1.5 },
     ]
 
-  },
+  }
 });
