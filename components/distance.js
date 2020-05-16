@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   AppRegistry,
   Text,
@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  Picker,
 } from 'react-native';
 // import Constants from 'expo-constants';
 
@@ -19,6 +20,9 @@ let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
 export default class DistanceVC extends Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     homeDisplay: 'flex',
     distanceDisplay: 'none',
@@ -55,11 +59,16 @@ export default class DistanceVC extends Component {
       valueC: String((parseInt(valueD) * 100).toFixed(2)),
     });
   };
+  navigator(value) {
+    console.log("Hello navigation")
+    this.props.navigation.navigate(value)
 
+  }
   render() {
     return (
-      <View style={styles.container}>
-        {/* {
+      <ScrollView>
+        <View style={styles.container}>
+          {/* {
           this.state.advance ? "show" : null}
         }
         {
@@ -67,51 +76,63 @@ export default class DistanceVC extends Component {
             "show"
           )
         } */}
-        <View style={styles.headContainer}>
-          <View style={styles.headTextContainer}>
-            <Text style={styles.headText}>Distance</Text>
-          </View>
-        </View>
+          <View style={styles.headContainer}>
+            <View style={styles.headTextContainer}>
+              <Picker
+                style={styles.pickerHeader}
+                onValueChange={(value) => this.navigator(value)}
+              >
+                <Picker.Item label="Distance Converter" value="Distance" />
+                <Picker.Item label="Currency Converter" value="Currency" />
+                <Picker.Item label="Measure Converter" value="Measure" />
+                <Picker.Item label="Speed Converter" value="Speed" />
+                <Picker.Item label="Temperature Converter" value="Temperature" />
+                <Picker.Item label="Weight Converter" value="Weight" />
 
-        <View style={styles.conversionContainer}>
-          <View style={styles.conversionHeadContainer}>
-            <Text style={styles.conversionHeadText}>KM to MILES</Text>
+              </Picker>
+            </View>
           </View>
-          <View style={styles.inputBoxContainer}>
-            <TextInput
-              style={styles.inputBox}
-              keyboardType={'numeric'}
-              value={this.state.valueA}
-              onChangeText={this.kmToMiles}
-            />
-            <TextInput
-              style={styles.inputBox}
-              keyboardType={'numeric'}
-              value={this.state.valueB}
-              onChangeText={this.milesToKm}
-            />
+
+          <View style={styles.conversionContainer}>
+            <View style={styles.conversionHeadContainer}>
+              <Text style={styles.conversionHeadText}>KM to MILES</Text>
+            </View>
+            <View style={styles.inputBoxContainer}>
+              <TextInput
+                style={styles.inputBox}
+                keyboardType={'numeric'}
+                value={this.state.valueA}
+                onChangeText={this.kmToMiles}
+              />
+              <TextInput
+                style={styles.inputBox}
+                keyboardType={'numeric'}
+                value={this.state.valueB}
+                onChangeText={this.milesToKm}
+              />
+            </View>
+          </View>
+          <View style={styles.conversionContainer}>
+            <View style={styles.conversionHeadContainer}>
+              <Text style={styles.conversionHeadText}>CentiMeter to Meter</Text>
+            </View>
+            <View style={styles.inputBoxContainer}>
+              <TextInput
+                style={styles.inputBox}
+                keyboardType={'numeric'}
+                value={this.state.valueC}
+                onChangeText={this.cmToMeter}
+              />
+              <TextInput
+                style={styles.inputBox}
+                keyboardType={'numeric'}
+                value={this.state.valueD}
+                onChangeText={this.meterToCm}
+              />
+            </View>
           </View>
         </View>
-        <View style={styles.conversionContainer}>
-          <View style={styles.conversionHeadContainer}>
-            <Text style={styles.conversionHeadText}>CentiMeter to Meter</Text>
-          </View>
-          <View style={styles.inputBoxContainer}>
-            <TextInput
-              style={styles.inputBox}
-              keyboardType={'numeric'}
-              value={this.state.valueC}
-              onChangeText={this.cmToMeter}
-            />
-            <TextInput
-              style={styles.inputBox}
-              keyboardType={'numeric'}
-              value={this.state.valueD}
-              onChangeText={this.meterToCm}
-            />
-          </View>
-        </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -126,8 +147,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: deviceWidth,
-    height: deviceHeight / 6,
-    backgroundColor: 'blue',
+    height: deviceHeight / 10,
+    backgroundColor: '#b734cf',
   },
   headTextContainer: {
     fontSize: deviceHeight / 21,
@@ -192,5 +213,22 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: deviceHeight / 24,
+  },
+  picker: {
+    height: deviceHeight / 16,
+    width: (3 * deviceWidth) / 8,
+    transform: [
+      { scaleX: 1.3 },
+      { scaleY: 1.3 },
+    ]
+  },
+  pickerHeader: {
+    height: deviceHeight / 16,
+    width: (2 * deviceWidth) / 3,
+    transform: [
+      { scaleX: 1.5 },
+      { scaleY: 1.5 },
+    ]
+
   },
 });

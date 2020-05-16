@@ -21,6 +21,9 @@ let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
 export default class Currency extends Component {
+    constructor(props){
+        super(props);
+    }
     state = {
         homeDisplay: 'flex',
         distanceDisplay: 'none',
@@ -52,32 +55,9 @@ export default class Currency extends Component {
                 console.log("opps", error.message);
             })
 
-        // axios
-        /*    .get(
-               `http://api.openrates.io/latest?base=${
-               this.state.fromCurrency
-               }&symbols=${this.state.toCurrency}`
-           ) */
-        /* axios
-            .get(
-                `http://api.openrates.io/latest?base=USD&symbols=INR`)
-            .then(response => {
-                this.setState({
-                    ValueA: ValueA,
-                    ValueB: String(parseInt(valueA) * response.data.rates['INR'].toFixed(3)),
-
-
-                })
-                console.log(response.data.rates['INR']);
-                console.log("current Value of b")
-                console.log(this.state.ValueB);
-            })
-            .catch(error => {
-                console.log("Opps", error.message);
-            }) */;
 
     };
-    converterB = (value) => {
+    converterB (value) {
         this.setState({
             ValueB: value,
         })
@@ -96,106 +76,114 @@ export default class Currency extends Component {
 
 
     }
+    navigator (value) {
+        console.log("Hello navigation")
+        this.props.navigation.navigate(value)
+
+    }
+    
 
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.headContainer}>
-                    <View style={styles.headTextContainer}>
-                        <Text style={styles.headText}>Currency Converter</Text>
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.headContainer}>
+                        <View style={styles.headTextContainer}>
+                            <Picker
+                                selectedValue={this.state.fromCurrency}
+                                style={styles.pickerHeader}
+                                onValueChange={(value)=> this.navigator(value)}
+                            >
+                                <Picker.Item label="Currency Converter" value="Currency" />
+                                <Picker.Item label="Distance Converter" value="Distance" />
+                                <Picker.Item label="Measure Converter" value="Measure" />
+                                <Picker.Item label="Speed Converter" value="Speed" />
+                                <Picker.Item label="Temperature Converter" value="Temperature" />
+                                <Picker.Item label="Weight Converter" value="Weight" />
+                                
+                            </Picker>
+                        </View>
+                    </View>
+
+
+                    <View style={styles.conversionContainer}>
+                        <View style={styles.imageConatiner}>
+                            <Image
+                                style={styles.currencyImage}
+                                source={{ uri: this.state.exchangeImage }} />
+
+                        </View>
+
+                        <View style={styles.dropDownContainer}>
+                            <Picker
+                                selectedValue={this.state.fromCurrency}
+                                style={styles.picker}
+                                onValueChange={(itemValue) => this.setState({ fromCurrency: itemValue })}
+                            >
+                                <Picker.Item label="USD Dollar" value="USD" />
+                                <Picker.Item label="Indian Rupee" value="INR" />
+                                <Picker.Item label="Euro" value="EUR" />
+                                <Picker.Item label="Austrailan Dollar" value="AUD" />
+                                <Picker.Item label="Canadian Dollar" value="CAD" />
+                                <Picker.Item label="Japanese Yen" value="JPY" />
+                                <Picker.Item label="New Zeland Dollar" value="NZD" />
+                                <Picker.Item label="Russian Ruble" value="RUB" />
+                                <Picker.Item label="Honk Kong Dollar" value="HKD" />
+                            </Picker>
+                            <Picker
+                                selectedValue={this.state.toCurrency}
+                                style={styles.picker}
+                                onValueChange={(itemValue) => this.setState({ toCurrency: itemValue })}
+                            >
+                                <Picker.Item label="USD Dollar" value="USD" />
+                                <Picker.Item label="Indian Rupee" value="INR" />
+                                <Picker.Item label="Euro" value="EUR" />
+                                <Picker.Item label="Austrailan Dollar" value="AUD" />
+                                <Picker.Item label="Canadian Dollar" value="CAD" />
+                                <Picker.Item label="Japanese Yen" value="JPY" />
+                                <Picker.Item label="New Zeland Dollar" value="NZD" />
+                                <Picker.Item label="Russian Ruble" value="RUB" />
+                                <Picker.Item label="Honk Kong Dollar" value="HKD" />
+
+                            </Picker>
+                        </View>
+
+                        <View style={styles.inputBoxContainer}>
+                            <View style={styles.currencyValueContainer}>
+                                <Text style={styles.CurrencyValue}>
+                                    {this.state.fromCurrency}
+                                </Text>
+                            </View>
+                            <TextInput
+                                style={styles.inputBox}
+                                keyboardType={'numeric'}
+                                value={this.state.ValueA}
+                                onChangeText={this.converterA}
+                            />
+
+
+                        </View>
+                        <View style={styles.inputBoxContainer}>
+                            <View style={styles.currencyValueContainer}>
+                                <Text style={styles.CurrencyValue}>
+                                    {this.state.toCurrency}
+                                </Text>
+                            </View>
+                            <TextInput
+                                style={styles.inputBox}
+                                keyboardType={'numeric'}
+                                value={this.state.ValueB}
+                                onChangeText={(value)=>this.converterB(value,'abcd')}
+                            />
+
+
+                        </View>
+
                     </View>
                 </View>
-
-
-                <View style={styles.conversionContainer}>
-                    <View style={styles.imageConatiner}>
-                        <Image
-                            style={styles.currencyImage}
-                            source={{ uri: this.state.exchangeImage }} />
-
-                    </View>
-
-                    <View style={styles.dropDownContainer}>
-                        <Picker
-                            selectedValue={this.state.fromCurrency}
-                            style={styles.picker}
-                            onValueChange={(itemValue) => this.setState({ fromCurrency: itemValue })}
-                        >
-                            <Picker.Item label="USD Dollar" value="USD" />
-                            <Picker.Item label="Indian Rupee" value="INR" />
-                            <Picker.Item label="Euro" value="EUR" />
-                            <Picker.Item label="Austrailan Dollar" value="AUD" />
-                            <Picker.Item label="Canadian Dollar" value="CAD" />
-                            <Picker.Item label="Japanese Yen" value="JPY" />
-                            <Picker.Item label="New Zeland Dollar" value="NZD" />
-                            <Picker.Item label="Russian Ruble" value="RUB" />
-                            <Picker.Item label="Honk Kong Dollar" value="HKD" />
-                        </Picker>
-                        <Picker
-                            selectedValue={this.state.toCurrency}
-                            style={styles.picker}
-                            onValueChange={(itemValue) => this.setState({ toCurrency: itemValue })}
-                        >
-                            <Picker.Item label="USD Dollar" value="USD" />
-                            <Picker.Item label="Indian Rupee" value="INR" />
-                            <Picker.Item label="Euro" value="EUR" />
-                            <Picker.Item label="Austrailan Dollar" value="AUD" />
-                            <Picker.Item label="Canadian Dollar" value="CAD" />
-                            <Picker.Item label="Japanese Yen" value="JPY" />
-                            <Picker.Item label="New Zeland Dollar" value="NZD" />
-                            <Picker.Item label="Russian Ruble" value="RUB" />
-                            <Picker.Item label="Honk Kong Dollar" value="HKD" />
-
-                        </Picker>
-                    </View>
-
-                    <View style={styles.inputBoxContainer}>
-                        <View style={styles.currencyValueContainer}>
-                            <Text style={styles.CurrencyValue}>
-                                {this.state.fromCurrency}
-                            </Text>
-                        </View>
-                        <TextInput
-                            style={styles.inputBox}
-                            keyboardType={'numeric'}
-                            value={this.state.ValueA}
-                            onChangeText={this.converterA}
-                        />
-
-
-                    </View>
-                    <View style={styles.inputBoxContainer}>
-                        <View style={styles.currencyValueContainer}>
-                            <Text style={styles.CurrencyValue}>
-                                {this.state.toCurrency}
-                            </Text>
-                        </View>
-                        <TextInput
-                            style={styles.inputBox}
-                            keyboardType={'numeric'}
-                            value={this.state.ValueB}
-                            onChangeText={this.converterB}
-                        />
-
-
-                    </View>
-
-
-                    {/*  <TextInput
-                            style={styles.inputBox}
-                            value={this.state.ValueB}
-                            keyboardType={'number-pad'}
-                            onChangeText={this.converterB}
-                        />
-                        <Text style={styles.CurrencyValue}>
-                            {this.state.toCurrency}
-
-                        </Text> */}
-
-
-                </View>
-            </View>
+                
+            </ScrollView>
         );
     }
 }
@@ -211,7 +199,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         width: deviceWidth,
         height: deviceHeight / 10,
-        backgroundColor: 'blue',
+        backgroundColor: '#b734cf',
     },
     headTextContainer: {
         fontSize: deviceHeight / 21,
@@ -221,7 +209,24 @@ const styles = StyleSheet.create({
         fontSize: deviceHeight / 21,
         color: 'white',
     },
-
+    buttonContainer:{
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop:30,
+    },
+    button:{
+        height:deviceHeight/14,
+        width:(3*deviceWidth)/8,
+        backgroundColor:'green',
+        borderRadius:5,
+        borderColor:'red',
+        alignItems:'center',
+        justifyContent:'center',
+        color:'white',
+    },
+    buttonText:{
+        fontSize:deviceHeight/22
+    },
 
     inputBoxContainer: {
         display: 'flex',
@@ -256,12 +261,11 @@ const styles = StyleSheet.create({
         marginTop: deviceHeight / 18,
     },
     picker: {
-        backgroundColor: 'lightgrey',
         height: deviceHeight / 16,
-        width: (2 * deviceWidth) / 6,
+        width: (3 * deviceWidth) / 8,
         transform: [
-            { scaleX: 1.2 },
-            { scaleY: 1.2 },
+            { scaleX: 1.3 },
+            { scaleY: 1.3 },
         ]
     },
     CurrencyValue: {
@@ -286,6 +290,15 @@ const styles = StyleSheet.create({
         width: (2 * deviceWidth) / 4,
         height: (2 * deviceWidth) / 4
     },
+    pickerHeader: {
+        height: deviceHeight / 16,
+        width: (2 * deviceWidth) / 3,
+        transform: [
+            { scaleX: 1.5 },
+            { scaleY: 1.5 },
+        ]
+
+    }
 
 
 });
