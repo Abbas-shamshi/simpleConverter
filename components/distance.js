@@ -174,9 +174,6 @@ export default class DistanceVC extends Component {
         ValueB: '0',
       })
     }
-    
-
-
   }
   navigator(value) {
     console.log("Hello navigation")

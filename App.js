@@ -1,5 +1,5 @@
 
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -37,7 +37,7 @@ const App = () => {
       <StatusBar barStyle="dark-content" />
 
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Currency">
+        <Stack.Navigator initialRouteName="Distance">
           <Stack.Screen name="Currency" component={Currency} />
           <Stack.Screen name="Distance" component={DistanceVC} />
           <Stack.Screen name="Measure" component={MeasureVC} />
@@ -49,6 +49,7 @@ const App = () => {
         </Stack.Navigator>
           
       </NavigationContainer>
+      {/* <Component/> */}
 
     </Fragment >
   );
