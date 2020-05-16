@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   AppRegistry,
   Text,
@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  Picker,
 } from 'react-native';
 // import Constants from 'expo-constants';
 
@@ -19,6 +20,9 @@ let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
 export default class WeightVC extends Component {
+  constructor(props){
+    super(props);
+}
   state = {
     homeDisplay: 'flex',
     distanceDisplay: 'none',
@@ -55,13 +59,30 @@ export default class WeightVC extends Component {
       valueC: String((parseInt(valueD) * 28.35).toFixed(2)),
     });
   };
+  navigator (value) {
+    console.log("Hello navigation")
+    this.props.navigation.navigate(value)
+
+}
 
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.headContainer}>
           <View style={styles.headTextContainer}>
-            <Text style={styles.headText}>Weight</Text>
+            <Picker
+              selectedValue={this.state.fromCurrency}
+              style={styles.pickerHeader}
+              onValueChange={(value) => this.navigator(value)}
+            >
+              <Picker.Item label="Weight Converter" value="Weight" />
+              <Picker.Item label="Currency Converter" value="Currency" />
+              <Picker.Item label="Distance Converter" value="Distance" />
+              <Picker.Item label="Measure Converter" value="Measure" />
+              <Picker.Item label="Speed Converter" value="Speed" />
+              <Picker.Item label="Temperature Converter" value="Temperature" />
+
+            </Picker>
           </View>
         </View>
 
@@ -181,4 +202,13 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: deviceHeight / 24,
   },
+  pickerHeader: {
+    height: deviceHeight / 16,
+    width: (2 * deviceWidth) / 3,
+    transform: [
+        { scaleX: 1.5 },
+        { scaleY: 1.5 },
+    ]
+
+}
 });
