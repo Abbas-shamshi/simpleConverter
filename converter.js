@@ -3,7 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
   Dimensions,
   SafeAreaView,
   ScrollView,
@@ -59,53 +59,53 @@ export default class Converter extends Component {
             <View style={styles.contentContainer}>
               <View style={globalStyle.buttonMain}>
                 {/* Distance Button Layout */}
-                <TouchableHighlight onPress={() => this.navigator('Currency')}>
+                <TouchableOpacity onPress={() => this.navigator('Currency')}>
                   <View style={styles.buttonInContainer}>
                     <View style={styles.buttonContainer}>
                       <Text style={styles.buttonText}>Currency</Text>
                     </View>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
 
                 {/* Weight Button Layout */}
-                <TouchableHighlight onPress={() => this.navigator('Distance')}>
+                <TouchableOpacity onPress={() => this.navigator('Distance')}>
                   <View style={styles.buttonInContainer}>
                     <View style={styles.buttonContainer}>
                       <Text style={styles.buttonText}>Distance</Text>
                     </View>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
               </View>
               <View style={globalStyle.buttonMain}>
 
                 {/* Weight Button Layout */}
-                <TouchableHighlight onPress={() => this.navigator('Weight')}>
+                <TouchableOpacity onPress={() => this.navigator('Weight')}>
                   <View style={styles.buttonInContainer}>
                     <View style={styles.buttonContainer}>
                       <Text style={styles.buttonText}>Weight</Text>
                     </View>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
 
                 {/* Temperature Button Layout */}
-                <TouchableHighlight onPress={() => this.navigator('Temperature')}>
+                <TouchableOpacity onPress={() => this.navigator('Temperature')}>
                   <View style={styles.buttonInContainer}>
                     <View style={styles.buttonContainer}>
                       <Text style={styles.buttonText}>Temperature</Text>
                     </View>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
               </View>
               <View style={globalStyle.buttonMain}>
 
                 {/* Speed Button Layout */}
-                <TouchableHighlight onPress={() => this.navigator('Speed')}>
+                <TouchableOpacity onPress={() => this.navigator('Speed')}>
                   <View style={styles.buttonInContainer}>
                     <View style={styles.buttonContainer}>
                       <Text style={styles.buttonText}>Speed</Text>
                     </View>
                   </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
 
 
 

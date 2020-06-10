@@ -4,7 +4,7 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
   ImageBackground,
   Alert,
@@ -14,6 +14,8 @@ import {
   TextInput,
   Picker,
 } from 'react-native';
+import globalStyle from '../style'
+
 // import Constants from 'expo-constants';
 
 let deviceHeight = Dimensions.get('window').height;
@@ -25,8 +27,8 @@ export default class DistanceVC extends Component {
   }
   state = {
 
-    ValueA: '0',
-    ValueB: '0',
+    ValueA: '',
+    ValueB: '',
     from: 'KM',
     to: 'CM',
     exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
@@ -164,14 +166,14 @@ export default class DistanceVC extends Component {
     if(pickerNO == 'picker1'){
       this.setState({
         from: itemValue,
-        ValueA: '0',
-        ValueB: '0',
+        ValueA: '',
+        ValueB: '',
       })
     }else if (pickerNO == 'picker2'){
       this.setState({
         to: itemValue,
-        ValueA: '0',
-        ValueB: '0',
+        ValueA: '',
+        ValueB: '',
       })
     }
   }
@@ -182,24 +184,24 @@ export default class DistanceVC extends Component {
   }
   clear = () => {
     this.setState({
-      ValueA: '0',
-      ValueB: '0',
+      ValueA: '',
+      ValueB: '',
     })
   }
   render() {
     return (
       <ScrollView>
-        <View style={styles.container}>
-          <View style={styles.headContainer}>
-            <View style={styles.headTextContainer}>
+        <View style={globalStyle.container}>
+          <View style={globalStyle.headContainer}>
+            <View style={globalStyle.headTextContainer}>
               <Picker
                 selectedValue={this.state.fromCurrency}
-                style={styles.pickerHeader}
+                style={globalStyle.pickerHeader}
                 onValueChange={(value) => this.navigator(value)}
               >
                 <Picker.Item label="Distance Converter" value="Distance" />
                 <Picker.Item label="Currency Converter" value="Currency" />
-                <Picker.Item label="Measure Converter" value="Measure" />
+                {/* <Picker.Item label="Measure Converter" value="Measure" /> */}
                 <Picker.Item label="Speed Converter" value="Speed" />
                 <Picker.Item label="Temperature Converter" value="Temperature" />
                 <Picker.Item label="Weight Converter" value="Weight" />
@@ -209,18 +211,18 @@ export default class DistanceVC extends Component {
           </View>
 
 
-          <View style={styles.conversionContainer}>
-            <View style={styles.imageConatiner}>
+          <View style={globalStyle.conversionContainer}>
+            <View style={globalStyle.imageConatiner}>
               <Image
-                style={styles.currencyImage}
+                style={globalStyle.currencyImage}
                 source={{ uri: this.state.exchangeImage }} />
 
             </View>
 
-            <View style={styles.dropDownContainer}>
+            <View style={globalStyle.dropDownContainer}>
               <Picker
                 selectedValue={this.state.from}
-                style={styles.picker}
+                style={globalStyle.picker}
                 onValueChange={(itemValue) => this.valuePicker(itemValue,'picker1')}
               >
                 <Picker.Item label="KM" value="KM" />
@@ -231,7 +233,7 @@ export default class DistanceVC extends Component {
               </Picker>
               <Picker
                 selectedValue={this.state.to}
-                style={styles.picker}
+                style={globalStyle.picker}
                 onValueChange={(itemValue) => this.valuePicker(itemValue,'picker2')}
               >
                 <Picker.Item label="KM" value="KM" />
@@ -242,14 +244,16 @@ export default class DistanceVC extends Component {
               </Picker>
             </View>
 
-            <View style={styles.inputBoxContainer}>
-              <View style={styles.currencyValueContainer}>
-                <Text style={styles.CurrencyValue}>
+            <View style={globalStyle.inputBoxContainer}>
+              <View style={globalStyle.currencyValueContainer}>
+                <Text style={globalStyle.CurrencyValue}>
                   {this.state.from}
                 </Text>
               </View>
               <TextInput
-                style={styles.inputBox}
+                style={globalStyle.inputBox}
+                placeholder={'Enter Value'}
+
                 keyboardType={'numeric'}
                 value={this.state.ValueA}
                 onChangeText={(value) => this.converter(value, 'value1')}
@@ -257,32 +261,32 @@ export default class DistanceVC extends Component {
 
 
             </View>
-            <View style={styles.inputBoxContainer}>
-              <View style={styles.currencyValueContainer}>
-                <Text style={styles.CurrencyValue}>
+            <View style={globalStyle.inputBoxContainer}>
+              <View style={globalStyle.currencyValueContainer}>
+                <Text style={globalStyle.CurrencyValue}>
                   {this.state.to}
                 </Text>
               </View>
               <TextInput
                 editable={false} 
-                style={styles.inputBox}
+                style={globalStyle.inputBox}
                 keyboardType={'numeric'}
                 value={this.state.ValueB}
                 onChangeText={(value) => this.converter(value, 'value2')}
               />
 
             </View>
-            <TouchableHighlight
+            <TouchableOpacity
               onPress={this.clear}>
-              <View style={styles.inputBoxContainer}>
-                <View style={styles.button} >
-                  <Text style={styles.btnText}>
+              <View style={globalStyle.inputBoxContainer}>
+                <View style={globalStyle.button} >
+                  <Text style={globalStyle.btnText}>
                     Clear
                   </Text>
                 </View>
 
               </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
           </View>
         </View>
@@ -291,119 +295,4 @@ export default class DistanceVC extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    height: deviceHeight,
-    width: deviceWidth,
-  },
-  headContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: deviceWidth,
-    height: deviceHeight / 10,
-    backgroundColor: '#2f6e20',
-  },
-  headTextContainer: {
-    fontSize: deviceHeight / 21,
-    color: 'white',
-  },
-  headText: {
-    fontSize: deviceHeight / 21,
-    color: 'white',
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-  },
-  button: {
-    height: deviceHeight / 14,
-    width: (3 * deviceWidth) / 8,
-    backgroundColor: '#2f6e20',
-    borderRadius: 5,
-    borderColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-  },
-  buttonText: {
-    fontSize: deviceHeight / 22
-  },
 
-  inputBoxContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  inputBox: {
-    backgroundColor: 'lightgrey',
-    width: (3 * deviceWidth) / 4,
-    height: deviceHeight / 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-
-    fontSize: deviceHeight / 25,
-    color: 'black',
-
-    textAlign: 'center',
-  },
-  conversionContainer: {
-    paddingBottom: 20,
-    borderBottomWidth: 2,
-    borderColor: 'blue',
-    height: (9 * deviceHeight) / 10,
-    marginTop: 10,
-  },
-  dropDownContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    marginTop: deviceHeight / 18,
-  },
-  picker: {
-    height: deviceHeight / 16,
-    width: (3 * deviceWidth) / 8,
-    transform: [
-      { scaleX: 1.3 },
-      { scaleY: 1.3 },
-    ]
-  },
-  CurrencyValue: {
-    fontSize: deviceHeight / 30,
-    padding: 10,
-
-  },
-  currencyValueContainer: {
-    justifyContent: "center",
-    alignItems: 'center',
-    height: deviceHeight / 10,
-    backgroundColor: 'lightgrey',
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderRightWidth: 1
-  },
-  imageConatiner: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  currencyImage: {
-    width: (2 * deviceWidth) / 4,
-    height: (2 * deviceWidth) / 4
-  },
-  pickerHeader: {
-    height: deviceHeight / 16,
-    width: (2 * deviceWidth) / 3,
-    transform: [
-      { scaleX: 1.5 },
-      { scaleY: 1.5 },
-    ],
-    color:'white',
-
-  },
-  btnText:{
-    color:'white',
-  }
-});

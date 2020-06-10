@@ -4,7 +4,7 @@ import {
     Text,
     View,
     StyleSheet,
-    TouchableHighlight,
+    TouchableOpacity,
     Image,
     ImageBackground,
     Alert,
@@ -15,19 +15,21 @@ import {
     Picker,
 } from 'react-native';
 import axios from 'axios';
+import globalStyle from '../style'
+
 // import Constants from 'expo-constants';
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
 export default class Currency extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
     state = {
-        
-        ValueA: '0',
-        ValueB: '0',
+
+        ValueA: '',
+        ValueB: '',
         from: 'USD',
         to: 'INR',
         exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
@@ -53,7 +55,7 @@ export default class Currency extends Component {
 
 
     };
-    converterB (value) {
+    converterB(value) {
         this.setState({
             ValueB: value,
         })
@@ -72,54 +74,54 @@ export default class Currency extends Component {
 
 
     }
-    navigator (value) {
+    navigator(value) {
         this.props.navigation.navigate(value)
 
     }
     clear = () => {
         this.setState({
-          ValueA: '0',
-          ValueB: '0',
+            ValueA: '',
+            ValueB: '',
         })
-      }
-    
+    }
+
 
 
     render() {
         return (
             <ScrollView>
-                <View style={styles.container}>
-                    <View style={styles.headContainer}>
-                        <View style={styles.headTextContainer}>
+                <View style={globalStyle.container}>
+                    <View style={globalStyle.headContainer}>
+                        <View style={globalStyle.headTextContainer}>
                             <Picker
                                 selectedValue={this.state.fromCurrency}
-                                style={styles.pickerHeader}
-                                onValueChange={(value)=> this.navigator(value)}
+                                style={globalStyle.pickerHeader}
+                                onValueChange={(value) => this.navigator(value)}
                             >
                                 <Picker.Item label="Currency Converter" value="Currency" />
                                 <Picker.Item label="Distance Converter" value="Distance" />
-                                <Picker.Item label="Measure Converter" value="Measure" />
+                                {/* <Picker.Item label="Measure Converter" value="Measure" /> */}
                                 <Picker.Item label="Speed Converter" value="Speed" />
                                 <Picker.Item label="Temperature Converter" value="Temperature" />
                                 <Picker.Item label="Weight Converter" value="Weight" />
-                                
+
                             </Picker>
                         </View>
                     </View>
 
 
-                    <View style={styles.conversionContainer}>
-                        <View style={styles.imageConatiner}>
+                    <View style={globalStyle.conversionContainer}>
+                        <View style={globalStyle.imageConatiner}>
                             <Image
-                                style={styles.currencyImage}
+                                style={globalStyle.currencyImage}
                                 source={{ uri: this.state.exchangeImage }} />
 
                         </View>
 
-                        <View style={styles.dropDownContainer}>
+                        <View style={globalStyle.dropDownContainer}>
                             <Picker
                                 selectedValue={this.state.from}
-                                style={styles.picker}
+                                style={globalStyle.picker}
                                 onValueChange={(itemValue) => this.setState({ from: itemValue })}
                             >
                                 <Picker.Item label="USD Dollar" value="USD" />
@@ -134,7 +136,7 @@ export default class Currency extends Component {
                             </Picker>
                             <Picker
                                 selectedValue={this.state.to}
-                                style={styles.picker}
+                                style={globalStyle.picker}
                                 onValueChange={(itemValue) => this.setState({ to: itemValue })}
                             >
                                 <Picker.Item label="USD Dollar" value="USD" />
@@ -150,14 +152,16 @@ export default class Currency extends Component {
                             </Picker>
                         </View>
 
-                        <View style={styles.inputBoxContainer}>
-                            <View style={styles.currencyValueContainer}>
-                                <Text style={styles.CurrencyValue}>
+                        <View style={globalStyle.inputBoxContainer}>
+                            <View style={globalStyle.currencyValueContainer}>
+                                <Text style={globalStyle.CurrencyValue}>
                                     {this.state.from}
                                 </Text>
                             </View>
                             <TextInput
-                                style={styles.inputBox}
+                                style={globalStyle.inputBox}
+                                placeholder={'Enter Value'}
+
                                 keyboardType={'numeric'}
                                 value={this.state.ValueA}
                                 onChangeText={this.converterA}
@@ -165,155 +169,41 @@ export default class Currency extends Component {
 
 
                         </View>
-                        <View style={styles.inputBoxContainer}>
-                            <View style={styles.currencyValueContainer}>
-                                <Text style={styles.CurrencyValue}>
+                        <View style={globalStyle.inputBoxContainer}>
+                            <View style={globalStyle.currencyValueContainer}>
+                                <Text style={globalStyle.CurrencyValue}>
                                     {this.state.to}
                                 </Text>
                             </View>
                             <TextInput
-                                style={styles.inputBox}
+                                style={globalStyle.inputBox}
+                                placeholder={'Enter Value'}
+
                                 keyboardType={'numeric'}
                                 value={this.state.ValueB}
-                                onChangeText={(value)=>this.converterB(value)}
+                                onChangeText={(value) => this.converterB(value)}
                             />
 
 
                         </View>
-                        <TouchableHighlight
-              onPress={this.clear}>
-              <View style={styles.inputBoxContainer}>
-                <View style={styles.button} >
-                  <Text style={styles.btnText}>
-                    Clear
+                        <TouchableOpacity
+                            onPress={this.clear}>
+                            <View style={globalStyle.inputBoxContainer}>
+                                <View style={globalStyle.button} >
+                                    <Text style={globalStyle.btnText}>
+                                        Clear
                   </Text>
-                </View>
+                                </View>
 
-              </View>
-            </TouchableHighlight>
+                            </View>
+                        </TouchableOpacity>
 
                     </View>
                 </View>
-                
+
             </ScrollView>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        height: deviceHeight,
-        width: deviceWidth,
-    },
-    headContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        width: deviceWidth,
-        height: deviceHeight / 10,
-        backgroundColor: '#2f6e20',
-    },
-    headTextContainer: {
-        fontSize: deviceHeight / 21,
-        color: 'white',
-    },
-    headText: {
-        fontSize: deviceHeight / 21,
-        color: 'white',
-    },
-    buttonContainer:{
-        alignItems:'center',
-        justifyContent:'center',
-        marginTop:30,
-    },
-    button:{
-        height:deviceHeight/14,
-        width:(3*deviceWidth)/8,
-        backgroundColor: '#2f6e20',
 
-        borderRadius:5,
-        borderColor:'red',
-        alignItems:'center',
-        justifyContent:'center',
-        color:'white',
-    },
-    buttonText:{
-        fontSize:deviceHeight/22
-    },
-
-    inputBoxContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    inputBox: {
-        backgroundColor: 'lightgrey',
-        width: (3 * deviceWidth) / 4,
-        height: deviceHeight / 10,
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-
-        fontSize: deviceHeight / 25,
-        color: 'black',
-
-        textAlign: 'center',
-    },
-    conversionContainer: {
-        paddingBottom: 20,
-        borderBottomWidth: 2,
-        borderColor: 'blue',
-        height: (9 * deviceHeight) / 10,
-        marginTop: 10,
-    },
-    dropDownContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around",
-        marginTop: deviceHeight / 18,
-    },
-    picker: {
-        height: deviceHeight / 16,
-        width: (3 * deviceWidth) / 8,
-        transform: [
-            { scaleX: 1.3 },
-            { scaleY: 1.3 },
-        ]
-    },
-    CurrencyValue: {
-        fontSize: deviceHeight / 30,
-        padding: 10,
-
-    },
-    currencyValueContainer: {
-        justifyContent: "center",
-        alignItems: 'center',
-        height: deviceHeight / 10,
-        backgroundColor: 'lightgrey',
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10,
-        borderRightWidth: 1
-    },
-    imageConatiner: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    currencyImage: {
-        width: (2 * deviceWidth) / 4,
-        height: (2 * deviceWidth) / 4
-    },
-    pickerHeader: {
-        height: deviceHeight / 16,
-        width: (2 * deviceWidth) / 3,
-        transform: [
-            { scaleX: 1.5 },
-            { scaleY: 1.5 },
-        ],
-        color:'white',
-    
-      },
-      btnText:{
-        color:'white',
-      }
-});
