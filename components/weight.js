@@ -203,7 +203,7 @@ converter(value, input) {
                 <Picker.Item label="Weight Converter" value="Weight" />
                 <Picker.Item label="Currency Converter" value="Currency" />
                 <Picker.Item label="Distance Converter" value="Distance" />
-                {/* <Picker.Item label="Measure Converter" value="Measure" /> */}
+                <Picker.Item label="Volume Converter" value="Volume" />
                 <Picker.Item label="Speed Converter" value="Speed" />
                 <Picker.Item label="Temperature Converter" value="Temperature" />
 

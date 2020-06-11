@@ -10,12 +10,6 @@ import {
 
 } from 'react-native';
 
-import DistanceVC from './components/distance';
-import CalculatorVC from './components/calculator';
-import MeasureVC from './components/measure';
-import SpeedVC from './components/speed';
-import WeightVC from './components/weight';
-import TemperatureVC from './components/temperature';
 import globalStyle from './style'
 
 let deviceHeight = Dimensions.get('window').height;
@@ -103,6 +97,15 @@ export default class Converter extends Component {
                   <View style={styles.buttonInContainer}>
                     <View style={styles.buttonContainer}>
                       <Text style={styles.buttonText}>Speed</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+                
+                {/* Volume Button */}
+                <TouchableOpacity onPress={() => this.navigator('Volume')}>
+                  <View style={styles.buttonInContainer}>
+                    <View style={styles.buttonContainer}>
+                      <Text style={styles.buttonText}>Volume</Text>
                     </View>
                   </View>
                 </TouchableOpacity>

@@ -13,52 +13,27 @@ import {
   ScrollView,
   TextInput,
   Picker,
-} from 'react-native';
-import globalStyle from '../style'
 
-// import Constants from 'expo-constants';
+} from 'react-native';
+import globalStyle from '../style';
+
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
-export default class TemperatureVC extends Component {
+export default class VolumeVC extends Component {
   constructor(props) {
     super(props);
   }
   state = {
     ValueA: '',
         ValueB: '',
-        from: 'Celsius',
-        to: 'Kelvin',
+        from: 'Ltr',
+        to: 'Gln',
         exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
   };
 
-  //   Other conversion functions
-  celToFaht = (valueA) => {
-    this.setState({
-      valueA,
-      valueB: String((parseInt(valueA) * 1.8 + 32).toFixed(2)),
-    });
-  };
-  fahtToCel = (valueB) => {
-    this.setState({
-      valueB,
-      valueA: String((parseInt(valueB) - 32) * (5 / 9).toFixed(2)),
-    });
-  };
-
-  kelToCel = (valueC) => {
-    this.setState({
-      valueC,
-      valueD: String((parseInt(valueC) - 273.15).toFixed(2)),
-    });
-  };
-  celToKel = (valueD) => {
-    this.setState({
-      valueD,
-      valueC: String((parseInt(valueD) + 273.15).toFixed(2)),
-    });
-  };
+  
   navigator(value) {
     console.log("Hello navigation")
     this.props.navigation.navigate(value)
@@ -74,17 +49,17 @@ export default class TemperatureVC extends Component {
     if(pickerNO == 'picker1'){
       this.setState({
         from: itemValue,
-        ValueA: '0',
-        ValueB: '0',
+        ValueA: '',
+        ValueB: '',
       })
     }else if (pickerNO == 'picker2'){
       this.setState({
         to: itemValue,
-        ValueA: '0',
-        ValueB: '0',
+        ValueA: '',
+        ValueB: '',
       })
     }
-  }
+  }1
   converter(value, input) {
     console.log(input);
 
@@ -92,57 +67,89 @@ export default class TemperatureVC extends Component {
       this.setState({
         ValueA: value,
       })
-      if (this.state.from == 'Celsius' && this.state.to == 'Kelvin') {
+      if (this.state.from == 'Ltr' && this.state.to == 'Ml') {
         this.setState({
-          ValueB: String((parseInt(value) + 273.15).toFixed(2)),
+          ValueB: String((parseInt(value) * 1000).toFixed(2)),
         });
-        console.log('Celsius TO Kelvin')
-      } else if (this.state.from == 'Celsius' && this.state.to == 'Frhn') {
+        console.log('Ltr TO Ml')
+      } else if (this.state.from == 'Ltr' && this.state.to == 'Gln') {
         this.setState({
-          ValueB: String(((parseInt(value) * (9/5)+32)).toFixed(2)),
+          ValueB: String((parseInt(value) / 3.785).toFixed(2)),
         });
-        console.log('Celsius TO Frhn')
-      }  else if (this.state.from == 'Kelvin' && this.state.to == 'Celsius') {
+        console.log('Ltr TO Gln')
+      } else if (this.state.from == 'Ltr' && this.state.to == 'Pint') {
         this.setState({
-          ValueB: String((parseInt(value) - 273.15).toFixed(2)),
+          ValueB: String((parseInt(value) * 2.113).toFixed(2)),
         });
-        console.log('Kelvin TO Celsius')
-      } else if (this.state.from == 'Kelvin' && this.state.to == 'Frhn') {
+        console.log('Ltr TO Pint')
+      } else if (this.state.from == 'Ml' && this.state.to == 'Ltr') {
         this.setState({
-          ValueB: String(((parseInt(value) - 273.15)*(9/5)+32).toFixed(2)),
+          ValueB: String((parseInt(value) / 1000).toFixed(2)),
         });
-        console.log('Kelvin TO Frhn')
-      }  else if (this.state.from == 'Frhn' && this.state.to == 'Celsius') {
+        console.log('Ml TO Ltr')
+      } else if (this.state.from == 'Ml' && this.state.to == 'Gln') {
         this.setState({
-          ValueB: String(((parseInt(value) - 32)*(5/9)).toFixed(2)),
+          ValueB: String((parseInt(value) /3785).toFixed(2)),
         });
-        console.log('Frhn TO Celsius')
-      } else if (this.state.from == 'Frhn' && this.state.to == 'Kelvin') {
+        console.log('Ml TO Gln')
+      } else if (this.state.from == 'Ml' && this.state.to == 'Pint') {
         this.setState({
-          ValueB: String(((parseInt(value) -32)*(5/9)+273.15).toFixed(2)),
+          ValueB: String((parseInt(value) / 473).toFixed(2)),
         });
-        console.log('Frhn TO Kelvin')
-      } else if (this.state.from == 'Celsius' && this.state.to == 'Celsius') {
+        console.log('Ml TO Pint')
+      } else if (this.state.from == 'Gln' && this.state.to == 'Ltr') {
+        this.setState({
+          ValueB: String((parseInt(value) * 3.785).toFixed(2)),
+        });
+        console.log('Gln TO Ltr')
+      } else if (this.state.from == 'Gln' && this.state.to == 'Ml') {
+        this.setState({
+          ValueB: String((parseInt(value) * 3785).toFixed(2)),
+        });
+        console.log('Gln TO Ml')
+      } else if (this.state.from == 'Gln' && this.state.to == 'Pint') {
+        this.setState({
+          ValueB: String((parseInt(value) * 8).toFixed(2)),
+        });
+        console.log('Gln TO Pint')
+      } else if (this.state.from == 'Pint' && this.state.to == 'Ltr') {
+        this.setState({
+          ValueB: String((parseInt(value) / 2.113).toFixed(2)),
+        });
+        console.log('Pint TO Ltr')
+      } else if (this.state.from == 'Pint' && this.state.to == 'Ml') {
+        this.setState({
+          ValueB: String((parseInt(value) * 473).toFixed(2)),
+        });
+        console.log('Pint TO Ml')
+      } else if (this.state.from == 'Pint' && this.state.to == 'Gln') {
+        this.setState({
+          ValueB: String((parseInt(value) / 8).toFixed(2)),
+        });
+        console.log('Pint TO Gln')
+      } else if (this.state.from == 'Pint' && this.state.to == 'Pint') {
         this.setState({
           ValueB: value,
         });
-        console.log('Celsius TO Celsius')
-      } else if (this.state.from == 'Kelvin' && this.state.to == 'Kelvin') {
+        console.log('Pint TO Pint')
+      } else if (this.state.from == 'Gln' && this.state.to == 'Gln') {
         this.setState({
           ValueB: value,
         });
-        console.log('Kelvin TO Kelvin')
+        console.log('Gln TO Gln')
+      } else if (this.state.from == 'Ltr' && this.state.to == 'Ltr') {
+        this.setState({
+          ValueB: value,
+        });
+        console.log('Ltr TO Ltr')
+      } else if (this.state.from == 'Ml' && this.state.to == 'Ml') {
+        this.setState({
+          ValueB: value,
+        });
+        console.log('Ml TO Ml')
       }
 
-    } /* else if (input == 'value2') {
-      const frm = this.state.from;
-      this.setState({
-        ValueB: value,
-        from: this.state.to,
-        to: frm,
-      }) 
-      
-    }*/
+    } 
     
 
 
@@ -155,16 +162,15 @@ export default class TemperatureVC extends Component {
         <View style={globalStyle.container}>
           <View style={globalStyle.headContainer}>
             <View style={globalStyle.headTextContainer}>
-              <Picker
-                selectedValue={this.state.fromCurrency}
+            <Picker
                 style={globalStyle.pickerHeader}
                 onValueChange={(value) => this.navigator(value)}
               >
-                <Picker.Item label="Temperature Converter" value="Temperature" />
-                <Picker.Item label="Currency Converter" value="Currency" />
-                <Picker.Item label="Distance Converter" value="Distance" />
                 <Picker.Item label="Volume Converter" value="Volume" />
                 <Picker.Item label="Speed Converter" value="Speed" />
+                <Picker.Item label="Distance Converter" value="Distance" />
+                <Picker.Item label="Currency Converter" value="Currency" />
+                <Picker.Item label="Temperature Converter" value="Temperature" />
                 <Picker.Item label="Weight Converter" value="Weight" />
 
               </Picker>
@@ -186,18 +192,20 @@ export default class TemperatureVC extends Component {
                 style={globalStyle.picker}
                 onValueChange={(itemValue) => this.valuePicker(itemValue,'picker1')}
               >
-                <Picker.Item label="Celsius" value="Celsius" />
-                <Picker.Item label="Kelvin" value="Kelvin" />
-                <Picker.Item label="Fahrenheit " value="Frhn" />
+                <Picker.Item label="Liter" value="Ltr" />
+                <Picker.Item label="Milliliter" value="Ml" />
+                <Picker.Item label="Gallon" value="Gln" />
+                <Picker.Item label="Pint" value="Pint" />
               </Picker>
               <Picker
                 selectedValue={this.state.to}
                 style={globalStyle.picker}
                 onValueChange={(itemValue) => this.valuePicker(itemValue,'picker2')}
               >
-                <Picker.Item label="Celsius" value="Celsius" />
-                <Picker.Item label="Kelvin" value="Kelvin" />
-                <Picker.Item label="Fahrenheit " value="Frhn" />
+                <Picker.Item label="Gallon" value="Gln" />
+                <Picker.Item label="Liter" value="Ltr" />
+                <Picker.Item label="Milliliter" value="Ml" />
+                <Picker.Item label="Pint" value="Pint" />
 
               </Picker>
             </View>
@@ -210,9 +218,9 @@ export default class TemperatureVC extends Component {
               </View>
               <TextInput
                 style={globalStyle.inputBox}
-                keyboardType={'numeric'}
                 placeholder={'Enter Value'}
 
+                keyboardType={'numeric'}
                 value={this.state.ValueA}
                 onChangeText={(value) => this.converter(value, 'value1')}
               />
@@ -227,7 +235,6 @@ export default class TemperatureVC extends Component {
               </View>
               <TextInput
                 editable={false} 
-
                 style={globalStyle.inputBox}
                 keyboardType={'numeric'}
                 value={this.state.ValueB}

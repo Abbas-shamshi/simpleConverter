@@ -23,9 +23,10 @@ import TemperatureVC from './components/temperature';
 import Home_temp from './routes/home_temp';
 import { createStackNavigator } from '@react-navigation/stack';
 import Details from './routes/details';
-import MeasureVC from './components/measure';
 import SpeedVC from './components/speed';
 import WeightVC from './components/weight';
+import VolumeVC from './components/volume';
+import ageChecker from './components/ageChecker';
 
 
 const Stack = createStackNavigator();
@@ -37,13 +38,15 @@ const App = () => {
       <StatusBar barStyle="dark-content" />
 
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Simple Converter">
+        <Stack.Navigator initialRouteName="age">
           <Stack.Screen name="Currency" component={Currency} />
           <Stack.Screen name="Distance" component={DistanceVC} />
-          <Stack.Screen name="Measure" component={MeasureVC} />
+          <Stack.Screen name="Volume" component={VolumeVC} />
           <Stack.Screen name="Speed" component={SpeedVC} />
           <Stack.Screen name="Temperature" component={TemperatureVC} />
           <Stack.Screen name="Weight" component={WeightVC} />
+          <Stack.Screen name="age" component={ageChecker} />
+
           <Stack.Screen name="Simple Converter" component={Converter} />
 
 
