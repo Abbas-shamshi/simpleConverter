@@ -100,7 +100,7 @@ export default class Converter extends Component {
                     </View>
                   </View>
                 </TouchableOpacity>
-                
+
                 {/* Volume Button */}
                 <TouchableOpacity onPress={() => this.navigator('Volume')}>
                   <View style={styles.buttonInContainer}>
@@ -109,9 +109,17 @@ export default class Converter extends Component {
                     </View>
                   </View>
                 </TouchableOpacity>
+              </View>
+              <View style={globalStyle.buttonMain}>
 
-
-
+                {/* Age Checker Button Layout */}
+                <TouchableOpacity onPress={() => this.navigator('Age')}>
+                  <View style={styles.buttonInContainer}>
+                    <View style={styles.buttonContainer}>
+                      <Text style={styles.buttonText}>Age Checker</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
               </View>
 
 
@@ -150,7 +158,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   contentContainer: {
-    justifyContent:'space-evenly',
+    justifyContent: 'space-evenly',
     height: (4 * deviceHeight) / 6
 
   },

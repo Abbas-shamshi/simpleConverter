@@ -7,9 +7,8 @@ import {
     Dimensions,
     ScrollView,
     TextInput,
-    Picker,
-
 } from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import globalStyle from '../style';
 
 
@@ -21,11 +20,11 @@ export default class ageChecker extends Component {
         super(props);
     }
     state = {
-        year:undefined,
-        month:undefined,
-        day:undefined,
+        year: undefined,
+        month: undefined,
+        day: undefined,
         message: undefined,
-        
+
     };
 
 
@@ -35,46 +34,91 @@ export default class ageChecker extends Component {
 
     }
     Calculate = () => {
-        var year = new Date().getFullYear();
-        var month = new Date().getMonth() + 1;
-        var day = new Date().getDate();
-        var yearDiff = year - (parseInt(this.state.year));
-        var monthDiff = month - (parseInt(this.state.month));
-        var dayDiff = day - (parseInt(this.state.day));
-        if (!this.state.year & !this.state.month & !this.state.day){
-            Alert.alert(
-                'Please Enter Year and Month!',
-            );
 
-        }else if(!this.state.year){
+        if (!this.state.year && !this.state.month && !this.state.year) {
             Alert.alert(
-                'Please Enter Year !',
+                'Please Enter Year, Month and Day of Birth!',
             );
-        }else if (this.state.year & this.state.month & this.state.day){
-            this.setState({
-                message:"You are "+ dayDiff + " days " + monthDiff + " months and " + yearDiff + " years old",
-            })
-            console.log("You are "+ dayDiff + " days " + monthDiff + " months and " + yearDiff + " years old")
-        }else if(this.state.month & this.state.year){
-            this.setState({
-                message:"You are " + monthDiff + " months and " + yearDiff + " years old",
-            })
-            console.log("You are " + monthDiff + " months and " + yearDiff + " years old")
-        }else if ( this.state.year){
-            this.setState({
-                message:"You are "  + yearDiff + " years old",
-            })
-            console.log("You are "  + yearDiff + " years old")
+        } else if (!this.state.year || !this.state.month || !this.state.year) {
+            Alert.alert(
+                'Please Enter all the details!',
+            );
+        } else {
+            var now = new Date();
+            var today = new Date(now.getYear(), now.getMonth(), now.getDate());
+            var yearNow = now.getYear();
+            var monthNow = now.getMonth() + 1;
+            var dateNow = now.getDate();
 
+            var dob = new Date(this.state.year, this.state.month, this.state.day);
+            var yearDob = dob.getYear();
+            var monthDob = dob.getMonth();
+            var dateDob = dob.getDate();
+            var age = {};
+            var ageString = "";
+            var yearString = "";
+            var monthString = "";
+            var dayString = "";
+            yearAge = yearNow - yearDob;
+
+            if (monthNow >= monthDob)
+                var monthAge = monthNow - monthDob;
+            else {
+                yearAge--;
+                var monthAge = 12 + monthNow - monthDob;
+            }
+
+            if (dateNow >= dateDob)
+                var dateAge = dateNow - dateDob;
+            else {
+                monthAge--;
+                var dateAge = 31 + dateNow - dateDob;
+
+                if (monthAge < 0) {
+                    monthAge = 11;
+                    yearAge--;
+                }
+            }
+
+            age = {
+                years: yearAge,
+                months: monthAge,
+                days: dateAge
+            };
+
+            if (age.years > 1) yearString = " years";
+            else yearString = " year";
+            if (age.months > 1) monthString = " months";
+            else monthString = " month";
+            if (age.days > 1) dayString = " days";
+            else dayString = " day";
+
+
+            if ((age.years > 0) && (age.months > 0) && (age.days > 0))
+                ageString = age.years + yearString + ", " + age.months + monthString + ", and " + age.days + dayString + " old.";
+            else if ((age.years == 0) && (age.months == 0) && (age.days > 0))
+                ageString = "Only " + age.days + dayString + " old!";
+            else if ((age.years > 0) && (age.months == 0) && (age.days == 0))
+                ageString = age.years + yearString + " old. Happy Birthday!!";
+            else if ((age.years > 0) && (age.months > 0) && (age.days == 0))
+                ageString = age.years + yearString + " and " + age.months + monthString + " old.";
+            else if ((age.years == 0) && (age.months > 0) && (age.days > 0))
+                ageString = age.months + monthString + " and " + age.days + dayString + " old.";
+            else if ((age.years > 0) && (age.months == 0) && (age.days > 0))
+                ageString = age.years + yearString + " and " + age.days + dayString + " old.";
+            else if ((age.years == 0) && (age.months > 0) && (age.days == 0))
+                ageString = age.months + monthString + " old.";
+            else ageString = "Oops! Could not calculate age!";
+
+
+            this.setState({
+                message: ageString,
+            })
         }
 
 
-        /* var msDiff = new Date("March 03, 2021").getTime() - new Date().getTime();    //Future date - current date
-        var daysTill30June2035 = Math.floor(msDiff / (1000 * 60 * 60 * 24));
-        console.log(daysTill30June2035); */
-
     }
-     
+
     render() {
         return (
             <ScrollView>
@@ -85,12 +129,13 @@ export default class ageChecker extends Component {
                                 style={globalStyle.pickerHeader}
                                 onValueChange={(value) => this.navigator(value)}
                             >
-                                <Picker.Item label="Volume Converter" value="Volume" />
-                                <Picker.Item label="Speed Converter" value="Speed" />
-                                <Picker.Item label="Distance Converter" value="Distance" />
+                                <Picker.Item label="Age Checker" value="Age" />
                                 <Picker.Item label="Currency Converter" value="Currency" />
-                                <Picker.Item label="Temperature Converter" value="Temperature" />
+                                <Picker.Item label="Distance Converter" value="Distance" />
                                 <Picker.Item label="Weight Converter" value="Weight" />
+                                <Picker.Item label="Temperature Converter" value="Temperature" />
+                                <Picker.Item label="Speed Converter" value="Speed" />
+                                <Picker.Item label="Volume Converter" value="Volume" />
 
                             </Picker>
                         </View>
@@ -110,21 +155,21 @@ export default class ageChecker extends Component {
                                 placeholder={'Day'}
 
                                 keyboardType={'numeric'}
-                                onChangeText={(value) => this.setState({day:value})}
+                                onChangeText={(value) => this.setState({ day: value })}
                             />
                             <TextInput
                                 style={globalStyle.ageInputBox}
                                 placeholder={'Month'}
 
                                 keyboardType={'numeric'}
-                                onChangeText={(value) => this.setState({month:value})}
+                                onChangeText={(value) => this.setState({ month: value })}
                             />
                             <TextInput
                                 style={globalStyle.ageInputBox}
                                 placeholder={'Year'}
 
                                 keyboardType={'numeric'}
-                                onChangeText={(value) => this.setState({year:value})}
+                                onChangeText={(value) => this.setState({ year: value })}
                             />
                         </View>
 
@@ -140,7 +185,7 @@ export default class ageChecker extends Component {
 
                             </View>
                         </TouchableOpacity>
-                        
+
 
                     </View>
                 </View>
