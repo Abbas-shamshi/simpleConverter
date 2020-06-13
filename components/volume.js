@@ -29,13 +29,13 @@ export default class VolumeVC extends Component {
   }
   state = {
     ValueA: '',
-        ValueB: '',
-        from: 'Ltr',
-        to: 'Gln',
-        exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
+    ValueB: '',
+    from: 'Ltr',
+    to: 'Gln',
+    exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
   };
 
-  
+
   navigator(value) {
     console.log("Hello navigation")
     this.props.navigation.navigate(value)
@@ -47,21 +47,21 @@ export default class VolumeVC extends Component {
       ValueB: '',
     })
   }
-  valuePicker(itemValue,pickerNO){
-    if(pickerNO == 'picker1'){
+  valuePicker(itemValue, pickerNO) {
+    if (pickerNO == 'picker1') {
       this.setState({
         from: itemValue,
         ValueA: '',
         ValueB: '',
       })
-    }else if (pickerNO == 'picker2'){
+    } else if (pickerNO == 'picker2') {
       this.setState({
         to: itemValue,
         ValueA: '',
         ValueB: '',
       })
     }
-  }1
+  } 1
   converter(value, input) {
     console.log(input);
 
@@ -91,7 +91,7 @@ export default class VolumeVC extends Component {
         console.log('Ml TO Ltr')
       } else if (this.state.from == 'Ml' && this.state.to == 'Gln') {
         this.setState({
-          ValueB: String((parseInt(value) /3785).toFixed(2)),
+          ValueB: String((parseInt(value) / 3785).toFixed(2)),
         });
         console.log('Ml TO Gln')
       } else if (this.state.from == 'Ml' && this.state.to == 'Pint') {
@@ -151,8 +151,8 @@ export default class VolumeVC extends Component {
         console.log('Ml TO Ml')
       }
 
-    } 
-    
+    }
+
 
 
 
@@ -164,16 +164,17 @@ export default class VolumeVC extends Component {
         <View style={globalStyle.container}>
           <View style={globalStyle.headContainer}>
             <View style={globalStyle.headTextContainer}>
-            <Picker
+              <Picker
                 style={globalStyle.pickerHeader}
                 onValueChange={(value) => this.navigator(value)}
               >
                 <Picker.Item label="Volume Converter" value="Volume" />
-                <Picker.Item label="Speed Converter" value="Speed" />
-                <Picker.Item label="Distance Converter" value="Distance" />
                 <Picker.Item label="Currency Converter" value="Currency" />
-                <Picker.Item label="Temperature Converter" value="Temperature" />
+                <Picker.Item label="Distance Converter" value="Distance" />
                 <Picker.Item label="Weight Converter" value="Weight" />
+                <Picker.Item label="Temperature Converter" value="Temperature" />
+                <Picker.Item label="Speed Converter" value="Speed" />
+                <Picker.Item label="Age Checker" value="Age" />
 
               </Picker>
             </View>
@@ -192,7 +193,7 @@ export default class VolumeVC extends Component {
               <Picker
                 selectedValue={this.state.from}
                 style={globalStyle.picker}
-                onValueChange={(itemValue) => this.valuePicker(itemValue,'picker1')}
+                onValueChange={(itemValue) => this.valuePicker(itemValue, 'picker1')}
               >
                 <Picker.Item label="Liter" value="Ltr" />
                 <Picker.Item label="Milliliter" value="Ml" />
@@ -202,7 +203,7 @@ export default class VolumeVC extends Component {
               <Picker
                 selectedValue={this.state.to}
                 style={globalStyle.picker}
-                onValueChange={(itemValue) => this.valuePicker(itemValue,'picker2')}
+                onValueChange={(itemValue) => this.valuePicker(itemValue, 'picker2')}
               >
                 <Picker.Item label="Gallon" value="Gln" />
                 <Picker.Item label="Liter" value="Ltr" />
@@ -236,7 +237,7 @@ export default class VolumeVC extends Component {
                 </Text>
               </View>
               <TextInput
-                editable={false} 
+                editable={false}
                 style={globalStyle.inputBox}
                 keyboardType={'numeric'}
                 value={this.state.ValueB}

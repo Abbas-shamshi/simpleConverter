@@ -95,6 +95,7 @@ conversionContainer: {
     borderColor: 'blue',
     height: (9 * deviceHeight) / 10,
     marginTop: 10,
+
 },
 dropDownContainer: {
     flexDirection: "row",
@@ -145,5 +146,41 @@ pickerHeader: {
 btnText: {
     color: 'white',
     fontSize:deviceHeight/38,
-}
+},
+ageInputBoxContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom:40,
+},
+ageInputBox: {
+    backgroundColor: 'lightgrey',
+    width: deviceWidth/4,
+    height: deviceHeight / 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    color: 'black',
+    fontSize:deviceHeight/30,
+    textAlign: 'center',
+},
+resultContainer:{
+    height:deviceHeight/10,
+    alignItems:'center',
+    justifyContent:'center',
+},
+resultText:{
+    fontSize:deviceHeight/22,
+    textAlign:'center',
+
+},
+ageConversionContainer: {
+    paddingBottom: 20,
+    borderBottomWidth: 2,
+    height: (6 * deviceHeight) / 10,
+    marginTop: 10,
+    justifyContent:'center'
+},
+
 });
