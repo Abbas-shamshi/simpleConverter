@@ -27,10 +27,10 @@ export default class TemperatureVC extends Component {
   }
   state = {
     ValueA: '',
-        ValueB: '',
-        from: 'Celsius',
-        to: 'Kelvin',
-        exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
+    ValueB: '',
+    from: 'Celsius',
+    to: 'Kelvin',
+    exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
   };
 
   //   Other conversion functions
@@ -70,14 +70,14 @@ export default class TemperatureVC extends Component {
       ValueB: '',
     })
   }
-  valuePicker(itemValue,pickerNO){
-    if(pickerNO == 'picker1'){
+  valuePicker(itemValue, pickerNO) {
+    if (pickerNO == 'picker1') {
       this.setState({
         from: itemValue,
         ValueA: '0',
         ValueB: '0',
       })
-    }else if (pickerNO == 'picker2'){
+    } else if (pickerNO == 'picker2') {
       this.setState({
         to: itemValue,
         ValueA: '0',
@@ -99,27 +99,27 @@ export default class TemperatureVC extends Component {
         console.log('Celsius TO Kelvin')
       } else if (this.state.from == 'Celsius' && this.state.to == 'Frhn') {
         this.setState({
-          ValueB: String(((parseInt(value) * (9/5)+32)).toFixed(2)),
+          ValueB: String(((parseInt(value) * (9 / 5) + 32)).toFixed(2)),
         });
         console.log('Celsius TO Frhn')
-      }  else if (this.state.from == 'Kelvin' && this.state.to == 'Celsius') {
+      } else if (this.state.from == 'Kelvin' && this.state.to == 'Celsius') {
         this.setState({
           ValueB: String((parseInt(value) - 273.15).toFixed(2)),
         });
         console.log('Kelvin TO Celsius')
       } else if (this.state.from == 'Kelvin' && this.state.to == 'Frhn') {
         this.setState({
-          ValueB: String(((parseInt(value) - 273.15)*(9/5)+32).toFixed(2)),
+          ValueB: String(((parseInt(value) - 273.15) * (9 / 5) + 32).toFixed(2)),
         });
         console.log('Kelvin TO Frhn')
-      }  else if (this.state.from == 'Frhn' && this.state.to == 'Celsius') {
+      } else if (this.state.from == 'Frhn' && this.state.to == 'Celsius') {
         this.setState({
-          ValueB: String(((parseInt(value) - 32)*(5/9)).toFixed(2)),
+          ValueB: String(((parseInt(value) - 32) * (5 / 9)).toFixed(2)),
         });
         console.log('Frhn TO Celsius')
       } else if (this.state.from == 'Frhn' && this.state.to == 'Kelvin') {
         this.setState({
-          ValueB: String(((parseInt(value) -32)*(5/9)+273.15).toFixed(2)),
+          ValueB: String(((parseInt(value) - 32) * (5 / 9) + 273.15).toFixed(2)),
         });
         console.log('Frhn TO Kelvin')
       } else if (this.state.from == 'Celsius' && this.state.to == 'Celsius') {
@@ -143,7 +143,7 @@ export default class TemperatureVC extends Component {
       }) 
       
     }*/
-    
+
 
 
 
@@ -163,9 +163,10 @@ export default class TemperatureVC extends Component {
                 <Picker.Item label="Temperature Converter" value="Temperature" />
                 <Picker.Item label="Currency Converter" value="Currency" />
                 <Picker.Item label="Distance Converter" value="Distance" />
-                <Picker.Item label="Volume Converter" value="Volume" />
-                <Picker.Item label="Speed Converter" value="Speed" />
                 <Picker.Item label="Weight Converter" value="Weight" />
+                <Picker.Item label="Speed Converter" value="Speed" />
+                <Picker.Item label="Volume Converter" value="Volume" />
+                <Picker.Item label="Age Checker" value="Age" />
 
               </Picker>
             </View>
@@ -184,7 +185,7 @@ export default class TemperatureVC extends Component {
               <Picker
                 selectedValue={this.state.from}
                 style={globalStyle.picker}
-                onValueChange={(itemValue) => this.valuePicker(itemValue,'picker1')}
+                onValueChange={(itemValue) => this.valuePicker(itemValue, 'picker1')}
               >
                 <Picker.Item label="Celsius" value="Celsius" />
                 <Picker.Item label="Kelvin" value="Kelvin" />
@@ -193,7 +194,7 @@ export default class TemperatureVC extends Component {
               <Picker
                 selectedValue={this.state.to}
                 style={globalStyle.picker}
-                onValueChange={(itemValue) => this.valuePicker(itemValue,'picker2')}
+                onValueChange={(itemValue) => this.valuePicker(itemValue, 'picker2')}
               >
                 <Picker.Item label="Celsius" value="Celsius" />
                 <Picker.Item label="Kelvin" value="Kelvin" />
@@ -226,7 +227,7 @@ export default class TemperatureVC extends Component {
                 </Text>
               </View>
               <TextInput
-                editable={false} 
+                editable={false}
 
                 style={globalStyle.inputBox}
                 keyboardType={'numeric'}
