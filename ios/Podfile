@@ -79,6 +79,8 @@ target 'simpleConverter' do
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'RNCPicker', :path => '../node_modules/@react-native-community/picker'
+
   target 'simpleConverterTests' do
     inherit! :complete
     # Pods for testing

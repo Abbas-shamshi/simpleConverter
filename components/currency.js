@@ -12,9 +12,10 @@ import {
     SafeAreaView,
     ScrollView,
     TextInput,
-    Picker,
 } from 'react-native';
 import axios from 'axios';
+import {Picker} from '@react-native-community/picker';
+
 import globalStyle from '../style'
 
 // import Constants from 'expo-constants';
