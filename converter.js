@@ -5,27 +5,22 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  SafeAreaView,
+  Image,
   ScrollView,
 
 } from 'react-native';
-
+import LinearGradient from 'react-native-linear-gradient';
 import globalStyle from './style'
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
-export default class Converter extends Component {
+export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
   }
   state = {
-    homeDisplay: 'flex',
-    distanceDisplay: 'none',
-    weightDisplay: 'none',
-    measureDisplay: 'none',
-    speedDisplay: 'none',
-    calculatorDisplay: 'none',
+    icon: 'https://cdn.pixabay.com/photo/2018/02/27/01/53/gene-function-3184518_960_720.png'
   };
 
   _handleTextChange = (inputValue) => {
@@ -33,105 +28,81 @@ export default class Converter extends Component {
   };
 
   navigator(value) {
-    console.log("Hello navigation")
-    this.props.navigation.navigate(value)
+    console.log("Hello navigation");
+    this.props.navigation.navigate(value);
 
   }
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView>
 
+        <View style={styles.container}>
 
-        {/* Home display */}
-        <View style={{ display: this.state.homeDisplay }}>
           {/* Heading */}
-          <View style={styles.headContainer}>
-            <Text style={styles.headText}>Simple Conversion</Text>
+          <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.headContainer}>
+            <Image
+              style={globalStyle.logo}
+              source={{ uri: this.state.icon }} />
+            <Text style={globalStyle.headText}>Simple App</Text>
+          </LinearGradient>
+
+          <View style={globalStyle.flexContainer}>
+            {/* Distance Button Layout */}
+            <TouchableOpacity onPress={() => this.navigator('Currency')}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.buttonContainer}>
+                <Text style={globalStyle.buttonText}>Currency</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            {/* Weight Button Layout */}
+            <TouchableOpacity onPress={() => this.navigator('Distance')}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.buttonContainer}>
+                <Text style={globalStyle.buttonText}>Distance</Text>
+              </LinearGradient>
+            </TouchableOpacity>
           </View>
-          <ScrollView>
+          <View style={globalStyle.flexContainer}>
 
-            <View style={styles.contentContainer}>
-              <View style={globalStyle.buttonMain}>
-                {/* Distance Button Layout */}
-                <TouchableOpacity onPress={() => this.navigator('Currency')}>
-                  <View style={styles.buttonInContainer}>
-                    <View style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Currency</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
+            {/* Weight Button Layout */}
+            <TouchableOpacity onPress={() => this.navigator('Weight')}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.buttonContainer}>
+                <Text style={globalStyle.buttonText}>Weight</Text>
+              </LinearGradient>
+            </TouchableOpacity>
 
-                {/* Weight Button Layout */}
-                <TouchableOpacity onPress={() => this.navigator('Distance')}>
-                  <View style={styles.buttonInContainer}>
-                    <View style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Distance</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={globalStyle.buttonMain}>
+            {/* Temperature Button Layout */}
+            <TouchableOpacity onPress={() => this.navigator('Temperature')}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.buttonContainer}>
+                <Text style={globalStyle.buttonText}>Temperature</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+          <View style={globalStyle.flexContainer}>
 
-                {/* Weight Button Layout */}
-                <TouchableOpacity onPress={() => this.navigator('Weight')}>
-                  <View style={styles.buttonInContainer}>
-                    <View style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Weight</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
+            {/* Speed Button Layout */}
+            <TouchableOpacity onPress={() => this.navigator('Speed')}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.buttonContainer}>
+                <Text style={globalStyle.buttonText}>Speed</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+            {/* Volume Button */}
+            <TouchableOpacity onPress={() => this.navigator('Volume')}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.buttonContainer}>
+                <Text style={globalStyle.buttonText}>Volume</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+          <View style={globalStyle.flexContainer}>
 
-                {/* Temperature Button Layout */}
-                <TouchableOpacity onPress={() => this.navigator('Temperature')}>
-                  <View style={styles.buttonInContainer}>
-                    <View style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Temperature</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={globalStyle.buttonMain}>
-
-                {/* Speed Button Layout */}
-                <TouchableOpacity onPress={() => this.navigator('Speed')}>
-                  <View style={styles.buttonInContainer}>
-                    <View style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Speed</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-
-                {/* Volume Button */}
-                <TouchableOpacity onPress={() => this.navigator('Volume')}>
-                  <View style={styles.buttonInContainer}>
-                    <View style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Volume</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={globalStyle.buttonMain}>
-
-                {/* Age Checker Button Layout */}
-                <TouchableOpacity onPress={() => this.navigator('Age')}>
-                  <View style={styles.buttonInContainer}>
-                    <View style={styles.buttonContainer}>
-                      <Text style={styles.buttonText}>Age Checker</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-
-
-            </View>
-          </ScrollView>
-
+            {/* Age Checker Button Layout */}
+            <TouchableOpacity onPress={() => this.navigator('Age')}>
+              <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.buttonContainer}>
+                <Text style={globalStyle.buttonText}>Age Checker</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
         </View >
-
-
-
-
-      </View >
+      </ScrollView>
     );
   }
 }
@@ -141,45 +112,16 @@ const styles = StyleSheet.create({
     height: deviceHeight,
     width: deviceWidth,
   },
-  headContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: deviceWidth,
-    height: deviceHeight / 6,
-    backgroundColor: '#2f6e20',
-  },
-  headTextContainer: {
-    fontSize: deviceHeight / 21,
-    color: 'white',
-  },
-  headText: {
-    fontSize: deviceHeight / 21,
-    color: 'white',
-  },
-  contentContainer: {
-    justifyContent: 'space-evenly',
-    height: (4 * deviceHeight) / 6
-
-  },
-
-  buttonInContainer: {
-    alignItems: 'center',
-  },
-  buttonContainer: {
-    height: deviceHeight / 10,
-    width: (3 * deviceWidth) / 7,
-    backgroundColor: '#2f6e20',
-    marginHorizontal: 'auto',
-    marginVertical: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   buttonText: {
-    fontSize: deviceHeight / 30,
-    color: 'white',
+    fontSize: 18,
+    fontFamily: 'Gill Sans',
+    textAlign: 'center',
+    margin: 10,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
   },
+
+
   conversionHeadContainer: {
     marginHorizontal: 'auto',
     marginTop: 30,

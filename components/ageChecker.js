@@ -4,18 +4,14 @@ import {
     View,
     TouchableOpacity,
     Alert,
-    Dimensions,
     ScrollView,
     TextInput,
 } from 'react-native';
-import {Picker} from '@react-native-community/picker';
+import { Picker } from '@react-native-community/picker';
 import globalStyle from '../style';
+import LinearGradient from 'react-native-linear-gradient';
 
-
-let deviceHeight = Dimensions.get('window').height;
-let deviceWidth = Dimensions.get('window').width;
-
-export default class ageChecker extends Component {
+export default class AgeChecker extends Component {
     constructor(props) {
         super(props);
     }
@@ -23,16 +19,24 @@ export default class ageChecker extends Component {
         year: undefined,
         month: undefined,
         day: undefined,
-        message: undefined,
+        message: "Your Age is",
 
     };
 
+    // ================To Navigate=======================
 
     navigator(value) {
         console.log("Hello navigation")
-        this.props.navigation.navigate(value)
+        this.props.navigation.navigate(value);
 
     }
+
+    //   ==================================================
+
+
+    //====================Calcuate Age======================
+
+
     Calculate = () => {
 
         if (!this.state.year && !this.state.month && !this.state.year) {
@@ -119,12 +123,17 @@ export default class ageChecker extends Component {
 
     }
 
+    // ====================================================================================
+
+
     render() {
         return (
             <ScrollView>
                 <View style={globalStyle.container}>
                     <View style={globalStyle.headContainer}>
                         <View style={globalStyle.headTextContainer}>
+
+                            {/* Navigate Different Pages */}
                             <Picker
                                 style={globalStyle.pickerHeader}
                                 onValueChange={(value) => this.navigator(value)}
@@ -136,12 +145,11 @@ export default class ageChecker extends Component {
                                 <Picker.Item label="Temperature Converter" value="Temperature" />
                                 <Picker.Item label="Speed Converter" value="Speed" />
                                 <Picker.Item label="Volume Converter" value="Volume" />
-
                             </Picker>
                         </View>
                     </View>
 
-
+                    {/* To Print Date based on input date  */}
                     <View style={globalStyle.ageConversionContainer}>
                         <View style={globalStyle.resultContainer}>
                             <Text style={globalStyle.resultText}>
@@ -149,6 +157,7 @@ export default class ageChecker extends Component {
                             </Text>
                         </View>
 
+                        {/* Accept input for the Date */}
                         <View style={globalStyle.ageInputBoxContainer}>
                             <TextInput
                                 style={globalStyle.ageInputBox}
@@ -173,20 +182,17 @@ export default class ageChecker extends Component {
                             />
                         </View>
 
-
+                        {/* Calcuate Button */}
                         <TouchableOpacity
                             onPress={this.Calculate}>
                             <View style={globalStyle.inputBoxContainer}>
-                                <View style={globalStyle.button} >
+                                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.button}>
                                     <Text style={globalStyle.btnText}>
                                         Calculate
                                     </Text>
-                                </View>
-
+                                </LinearGradient>
                             </View>
                         </TouchableOpacity>
-
-
                     </View>
                 </View>
             </ScrollView>

@@ -1,68 +1,34 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
   Image,
-  ImageBackground,
-  Alert,
-  Dimensions,
-  SafeAreaView,
   ScrollView,
   TextInput,
 } from 'react-native';
-import {Picker} from '@react-native-community/picker';
-
+import { Picker } from '@react-native-community/picker';
 import globalStyle from '../style'
-
-// import Constants from 'expo-constants';
-
-let deviceHeight = Dimensions.get('window').height;
-let deviceWidth = Dimensions.get('window').width;
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class DistanceVC extends Component {
   constructor(props) {
     super(props);
   }
   state = {
-
     ValueA: '',
     ValueB: '',
     from: 'KM',
     to: 'CM',
     exchangeImage: 'https://newtonfoxbds.com/wp-content/uploads/2017/01/Two_way-data-exchange.gif',
+    navName: "Distance"
   };
 
-  //   Other conversion functions
-  kmToMiles = (valueA) => {
-    this.setState({
-      valueA,
-      valueB: String((parseInt(valueA) / 1.609).toFixed(2)),
-    });
-  };
-  milesToKm = (valueB) => {
-    this.setState({
-      valueB,
-      valueA: String((parseInt(valueB) * 1.609).toFixed(2)),
-    });
-  };
-  cmToMeter = (valueC) => {
-    this.setState({
-      valueC,
-      valueD: String((parseInt(valueC) / 100).toFixed(2)),
-    });
-  };
-  meterToCm = (valueD) => {
-    this.setState({
-      valueD,
-      valueC: String((parseInt(valueD) * 100).toFixed(2)),
-    });
-  };
+
+  //========================= Identify and Calculate ================================
+
   converter(value, input) {
     console.log(input);
-
     if (input == 'value1') {
       this.setState({
         ValueA: value,
@@ -148,21 +114,13 @@ export default class DistanceVC extends Component {
         });
         console.log('CM TO CM')
       }
-
-    } /* else if (input == 'value2') {
-      const frm = this.state.from;
-      this.setState({
-        ValueB: value,
-        from: this.state.to,
-        to: frm,
-      }) 
-      
-    }*/
-
-
-
-
+    }
   }
+  // =========================================================================
+
+
+  // ================Select different conversion options=======================
+
   valuePicker(itemValue, pickerNO) {
     if (pickerNO == 'picker1') {
       this.setState({
@@ -178,25 +136,36 @@ export default class DistanceVC extends Component {
       })
     }
   }
+  //   =================================================
+
+  // =============To Navigate================
+
   navigator(value) {
     console.log("Hello navigation")
-    this.props.navigation.navigate(value)
+    this.props.navigation.navigate(value);
 
   }
+  //   ====================================================
+
+
+  // =====================To reset Values ==============
   clear = () => {
     this.setState({
       ValueA: '',
       ValueB: '',
     })
   }
+
+  //   =============================
   render() {
     return (
       <ScrollView>
         <View style={globalStyle.container}>
           <View style={globalStyle.headContainer}>
             <View style={globalStyle.headTextContainer}>
+              {/* Navigate Different Pages */}
               <Picker
-                selectedValue={this.state.fromCurrency}
+                selectedValue={this.state.navName}
                 style={globalStyle.pickerHeader}
                 onValueChange={(value) => this.navigator(value)}
               >
@@ -207,20 +176,19 @@ export default class DistanceVC extends Component {
                 <Picker.Item label="Speed Converter" value="Speed" />
                 <Picker.Item label="Volume Converter" value="Volume" />
                 <Picker.Item label="Age Checker" value="Age" />
-
               </Picker>
             </View>
           </View>
 
-
+          {/* Exchange Image==== */}
           <View style={globalStyle.conversionContainer}>
             <View style={globalStyle.imageConatiner}>
               <Image
                 style={globalStyle.currencyImage}
                 source={{ uri: this.state.exchangeImage }} />
-
             </View>
 
+            {/* Select Different Conversion Options */}
             <View style={globalStyle.dropDownContainer}>
               <Picker
                 selectedValue={this.state.from}
@@ -231,7 +199,6 @@ export default class DistanceVC extends Component {
                 <Picker.Item label="Mile" value="Mile" />
                 <Picker.Item label="CM" value="CM" />
                 <Picker.Item label="Meter" value="Meter" />
-
               </Picker>
               <Picker
                 selectedValue={this.state.to}
@@ -242,10 +209,10 @@ export default class DistanceVC extends Component {
                 <Picker.Item label="Mile" value="Mile" />
                 <Picker.Item label="CM" value="CM" />
                 <Picker.Item label="Meter" value="Meter" />
-
               </Picker>
             </View>
 
+            {/* Accept input for conversion */}
             <View style={globalStyle.inputBoxContainer}>
               <View style={globalStyle.currencyValueContainer}>
                 <Text style={globalStyle.CurrencyValue}>
@@ -255,14 +222,12 @@ export default class DistanceVC extends Component {
               <TextInput
                 style={globalStyle.inputBox}
                 placeholder={'Enter Value'}
-
                 keyboardType={'numeric'}
                 value={this.state.ValueA}
                 onChangeText={(value) => this.converter(value, 'value1')}
               />
-
-
             </View>
+
             <View style={globalStyle.inputBoxContainer}>
               <View style={globalStyle.currencyValueContainer}>
                 <Text style={globalStyle.CurrencyValue}>
@@ -276,20 +241,19 @@ export default class DistanceVC extends Component {
                 value={this.state.ValueB}
                 onChangeText={(value) => this.converter(value, 'value2')}
               />
-
             </View>
+
+            {/* To Clear the Inputs */}
             <TouchableOpacity
               onPress={this.clear}>
               <View style={globalStyle.inputBoxContainer}>
-                <View style={globalStyle.button} >
+                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#4878db', '#3b5998', '#192f6a']} style={globalStyle.button}>
                   <Text style={globalStyle.btnText}>
                     Clear
-                  </Text>
-                </View>
-
+                                    </Text>
+                </LinearGradient>
               </View>
             </TouchableOpacity>
-
           </View>
         </View>
       </ScrollView>
